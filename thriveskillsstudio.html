@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thrive Skills Studio | Shaping Global Professionals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+  --navy: #0a1628;
+  --deep: #0d1f3c;
+  --royal: #1a3a6b;
+  --cobalt: #1e4fc2;
+  --sky: #2563eb;
+  --gold: #c9933a;
+  --gold-light: #f0b94a;
+  --cream: #f8f4ef;
+  --white: #ffffff;
+  --gray: #8a96a8;
+  --light: #e8ecf2;
+  --accent: #e8572a;
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ===== CUSTOM CURSOR ===== */
+#cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s, background .2s;
+  mix-blend-mode: normal;
+}
+#cursor-follower {
+  position: fixed;
+  width: 40px; height: 40px;
+  border: 1.5px solid rgba(201,147,58,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: transform 0.12s ease, width .3s, height .3s, border-color .3s;
+}
+body:hover #cursor { opacity: 1; }
+a:hover ~ #cursor, button:hover ~ #cursor { width: 20px; height: 20px; }
+
+/* ===== NAVBAR ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 18px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background .4s, padding .4s, box-shadow .4s;
+}
+nav.scrolled {
+  background: rgba(10,22,40,0.97);
+  padding: 12px 60px;
+  box-shadow: 0 2px 40px rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 900;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  text-decoration: none;
+  display: flex; flex-direction: column; line-height: 1;
+}
+.nav-logo span { color: var(--gold); font-size: 11px; font-family: 'DM Sans',sans-serif; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; margin-top: 2px; }
+.nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: rgba(255,255,255,0.8);
+  font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  transition: color .3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1.5px;
+  background: var(--gold); transition: width .3s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  background: var(--gold); color: var(--navy) !important;
+  padding: 10px 24px; border-radius: 3px;
+  font-weight: 700 !important; font-size: 12px !important;
+  letter-spacing: 0.1em; transition: transform .2s, box-shadow .2s !important;
+}
+.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,147,58,0.4); }
+.nav-cta::after { display: none !important; }
+.nav-phone {
+  font-size: 12px; color: rgba(255,255,255,0.6);
+  letter-spacing: 0.05em; margin-right: -8px;
+}
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.hamburger span { width: 24px; height: 2px; background: var(--white); display: block; transition: .3s; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex; align-items: center;
+  overflow: hidden;
+  background: var(--navy);
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 80% at 70% 50%, rgba(30,79,194,0.15) 0%, transparent 60%),
+              radial-gradient(ellipse 40% 60% at 10% 80%, rgba(201,147,58,0.08) 0%, transparent 50%);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+  animation: gridShift 20s linear infinite;
+}
+@keyframes gridShift { 0%{ background-position: 0 0; } 100%{ background-position: 80px 80px; } }
+
+.hero-orbs {
+  position: absolute; inset: 0; pointer-events: none;
+}
+.orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); opacity: 0.12;
+  animation: orbFloat 8s ease-in-out infinite;
+}
+.orb1 { width: 400px; height: 400px; background: var(--cobalt); top: -100px; right: 10%; animation-delay: 0s; }
+.orb2 { width: 300px; height: 300px; background: var(--gold); bottom: -80px; left: 5%; animation-delay: 3s; }
+.orb3 { width: 200px; height: 200px; background: var(--sky); top: 40%; right: 30%; animation-delay: 5s; }
+@keyframes orbFloat { 0%,100%{ transform: translateY(0) scale(1); } 50%{ transform: translateY(-30px) scale(1.05); } }
+
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 1400px; margin: 0 auto;
+  padding: 120px 60px 60px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center; gap: 60px;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(201,147,58,0.12);
+  border: 1px solid rgba(201,147,58,0.3);
+  padding: 8px 18px; border-radius: 100px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 24px;
+  opacity: 0; animation: fadeUp .8s .2s forwards;
+}
+.hero-badge::before { content:''; width:6px; height:6px; background: var(--gold); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:.5; transform:scale(1.4); } }
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 5vw, 80px);
+  font-weight: 900; line-height: 1.05;
+  margin-bottom: 20px;
+  opacity: 0; animation: fadeUp .8s .4s forwards;
+}
+.hero-title em { font-style: italic; color: var(--gold); }
+.hero-subtitle {
+  font-size: 17px; line-height: 1.7;
+  color: rgba(255,255,255,0.65);
+  max-width: 520px;
+  margin-bottom: 40px;
+  opacity: 0; animation: fadeUp .8s .6s forwards;
+}
+.hero-btns {
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp .8s .8s forwards;
+}
+.btn-primary {
+  background: var(--gold);
+  color: var(--navy);
+  padding: 16px 36px;
+  border-radius: 4px;
+  font-weight: 700; font-size: 13px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  text-decoration: none;
+  transition: transform .25s, box-shadow .25s;
+  position: relative; overflow: hidden;
+}
+.btn-primary::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  opacity: 0; transition: opacity .3s;
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(201,147,58,0.35); }
+.btn-primary:hover::before { opacity: 1; }
+.btn-outline {
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: var(--white);
+  padding: 16px 36px; border-radius: 4px;
+  font-weight: 500; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color .3s, background .3s;
+}
+.btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.06); }
+
+.hero-stats {
+  display: flex; gap: 40px; margin-top: 52px;
+  opacity: 0; animation: fadeUp .8s 1s forwards;
+}
+.stat { }
+.stat-num {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 44px; color: var(--gold); line-height: 1;
+}
+.stat-label { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px; }
+
+.hero-visual {
+  position: relative;
+  opacity: 0; animation: fadeRight .9s .5s forwards;
+}
+.hero-img-wrap {
+  position: relative;
+  border-radius: 8px; overflow: hidden;
+}
+.hero-img-wrap img {
+  width: 100%; height: 580px; object-fit: cover; object-position: top center;
+  display: block;
+  border-radius: 8px;
+}
+.hero-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(10,22,40,0.2) 0%, transparent 60%);
+  border-radius: 8px;
+}
+.hero-card {
+  position: absolute; bottom: -20px; left: -30px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 20px 24px; border-radius: 8px;
+  animation: floatCard 4s ease-in-out infinite;
+}
+@keyframes floatCard { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-10px); } }
+.hero-card-num { font-family: 'Bebas Neue'; font-size: 36px; color: var(--gold); line-height: 1; }
+.hero-card-text { font-size: 11px; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; text-transform: uppercase; }
+.hero-card2 {
+  position: absolute; top: 30px; right: -20px;
+  background: var(--gold);
+  padding: 16px 20px; border-radius: 8px;
+  animation: floatCard2 4s ease-in-out infinite;
+  animation-delay: 2s;
+}
+@keyframes floatCard2 { 0%,100%{ transform: translateY(0) rotate(2deg); } 50%{ transform: translateY(-12px) rotate(2deg); } }
+.hero-card2-text { font-size: 11px; font-weight: 700; color: var(--navy); letter-spacing: 0.1em; text-transform: uppercase; }
+.hero-card2-sub { font-size: 9px; color: rgba(10,22,40,0.6); margin-top: 2px; }
+.hero-line {
+  position: absolute; top: 50%; left: -40px;
+  width: 3px; height: 120px; background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  transform: translateY(-50%);
+}
+
+/* ===== MARQUEE ===== */
+.marquee-section {
+  background: var(--gold);
+  padding: 16px 0;
+  overflow: hidden;
+  position: relative;
+}
+.marquee-track {
+  display: flex;
+  animation: marqueeScroll 20s linear infinite;
+  white-space: nowrap;
+}
+.marquee-item {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 18px; letter-spacing: 0.15em;
+  color: var(--navy);
+  padding: 0 40px;
+  display: flex; align-items: center; gap: 20px;
+}
+.marquee-item::after { content: '◆'; opacity: 0.4; }
+@keyframes marqueeScroll { 0%{ transform: translateX(0); } 100%{ transform: translateX(-50%); } }
+
+/* ===== SECTION BASE ===== */
+section { padding: 110px 60px; max-width: 1400px; margin: 0 auto; }
+.section-outer { position: relative; overflow: hidden; }
+.section-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-label::before { content: ''; width: 30px; height: 1.5px; background: var(--gold); }
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 3.5vw, 56px);
+  font-weight: 900; line-height: 1.1;
+  margin-bottom: 20px;
+}
+.section-title em { font-style: italic; color: var(--gold); }
+.section-sub { font-size: 16px; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 580px; }
+
+/* ===== FADE ANIMATIONS ===== */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity .8s, transform .8s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-50px); transition: opacity .8s, transform .8s; }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(50px); transition: opacity .8s, transform .8s; }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+@keyframes fadeUp { from{ opacity:0; transform:translateY(30px); } to{ opacity:1; transform:translateY(0); } }
+@keyframes fadeRight { from{ opacity:0; transform:translateX(50px); } to{ opacity:1; transform:translateX(0); } }
+
+/* ===== APPROACH SECTION ===== */
+.approach-outer { background: var(--deep); }
+.approach-grid {
+  display: grid; grid-template-columns: 1fr 1.2fr;
+  gap: 80px; align-items: center;
+}
+.approach-cards { display: flex; flex-direction: column; gap: 20px; }
+.approach-card {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 28px 32px;
+  background: rgba(255,255,255,0.03);
+  display: flex; align-items: flex-start; gap: 20px;
+  transition: border-color .3s, background .3s, transform .3s;
+  cursor: default;
+}
+.approach-card:hover {
+  border-color: rgba(201,147,58,0.4);
+  background: rgba(201,147,58,0.05);
+  transform: translateX(8px);
+}
+.approach-icon {
+  width: 52px; height: 52px; border-radius: 8px;
+  background: linear-gradient(135deg, rgba(201,147,58,0.2), rgba(30,79,194,0.2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.approach-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+.approach-card p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+.approach-img {
+  position: relative;
+  border-radius: 12px; overflow: hidden;
+}
+.approach-img img {
+  width: 100%; height: 500px;
+  object-fit: cover; object-position: center;
+  border-radius: 12px;
+  filter: brightness(0.85) saturate(1.1);
+}
+.approach-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,22,40,0.5) 0%, transparent 50%);
+}
+.approach-img-badge {
+  position: absolute; bottom: 24px; left: 24px; right: 24px;
+  background: rgba(10,22,40,0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(201,147,58,0.3);
+  border-radius: 8px; padding: 18px 22px;
+}
+.approach-img-badge p { font-size: 15px; font-weight: 600; line-height: 1.4; }
+.approach-img-badge span { font-size: 12px; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ===== WHO WE ARE ===== */
+.about-grid {
+  display: grid; grid-template-columns: 1.1fr 1fr;
+  gap: 80px; align-items: center;
+}
+.about-img {
+  position: relative;
+}
+.about-img img {
+  width: 100%; height: 580px;
+  object-fit: cover; object-position: top;
+  border-radius: 12px;
+}
+.about-img-frame {
+  position: absolute; top: -20px; left: -20px; right: 20px; bottom: 20px;
+  border: 2px solid rgba(201,147,58,0.25);
+  border-radius: 12px; z-index: -1;
+}
+.about-number-badge {
+  position: absolute; top: 30px; right: -20px;
+  background: var(--gold);
+  color: var(--navy);
+  padding: 16px 18px;
+  border-radius: 8px;
+  text-align: center;
+  animation: floatCard 5s ease-in-out infinite;
+}
+.about-number-badge .num { font-family: 'Bebas Neue'; font-size: 32px; line-height: 1; }
+.about-number-badge .lbl { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.about-text p { font-size: 16px; line-height: 1.8; color: rgba(255,255,255,0.7); margin-bottom: 20px; }
+.about-text p strong { color: var(--white); font-weight: 600; }
+.about-highlights { display: flex; gap: 24px; margin: 32px 0; flex-wrap: wrap; }
+.highlight {
+  border-left: 3px solid var(--gold);
+  padding-left: 16px;
+}
+.highlight h4 { font-size: 22px; font-weight: 700; color: var(--gold); font-family: 'Bebas Neue'; }
+.highlight p { font-size: 12px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; }
+
+/* ===== SERVICES ===== */
+.services-outer { background: var(--deep); }
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 60px;
+}
+.service-card {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.02);
+  transition: transform .4s cubic-bezier(.22,1,.36,1), border-color .3s, box-shadow .4s;
+  cursor: pointer;
+  position: relative;
+}
+.service-card:hover {
+  transform: translateY(-12px);
+  border-color: rgba(201,147,58,0.4);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(201,147,58,0.15);
+}
+.service-img {
+  height: 220px; overflow: hidden; position: relative;
+}
+.service-img img { width:100%; height:100%; object-fit:cover; transition: transform .6s; }
+.service-card:hover .service-img img { transform: scale(1.06); }
+.service-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,22,40,0.7) 0%, transparent 60%);
+}
+.service-num {
+  position: absolute; top: 16px; right: 16px;
+  font-family: 'Bebas Neue'; font-size: 44px;
+  color: rgba(255,255,255,0.15); line-height: 1;
+}
+.service-body { padding: 28px 28px 32px; }
+.service-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 10px;
+}
+.service-body h3 { font-family: 'Playfair Display'; font-size: 22px; font-weight: 700; margin-bottom: 12px; line-height: 1.2; }
+.service-body p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 24px; }
+.service-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold); text-decoration: none;
+  transition: gap .3s;
+}
+.service-link:hover { gap: 14px; }
+.service-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--cobalt));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .4s;
+}
+.service-card:hover::after { transform: scaleX(1); }
+
+/* ===== TRAINER ===== */
+.trainer-grid {
+  display: grid; grid-template-columns: 1fr 1.1fr;
+  gap: 80px; align-items: center;
+}
+.trainer-img { position: relative; }
+.trainer-img img {
+  width: 100%; height: 600px;
+  object-fit: cover; object-position: top;
+  border-radius: 12px;
+  filter: contrast(1.05);
+}
+.trainer-social {
+  position: absolute; right: -20px; top: 50%;
+  transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.trainer-social a {
+  width: 42px; height: 42px; border-radius: 8px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); text-decoration: none;
+  font-size: 14px;
+  transition: background .3s, border-color .3s, transform .3s;
+}
+.trainer-social a:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); transform: scale(1.1); }
+.trainer-quote {
+  position: absolute; bottom: 30px; left: -20px; right: 50px;
+  background: var(--royal);
+  border-left: 4px solid var(--gold);
+  padding: 20px 24px;
+  border-radius: 0 8px 8px 0;
+}
+.trainer-quote p { font-size: 15px; font-style: italic; line-height: 1.5; opacity: 0.9; }
+.trainer-text { }
+.trainer-role { font-size: 13px; color: var(--gold); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+.trainer-text h2 {
+  font-family: 'Playfair Display'; font-size: clamp(36px,3vw,52px);
+  font-weight: 900; line-height: 1.1; margin-bottom: 24px;
+}
+.trainer-text p { font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.65); margin-bottom: 16px; }
+.trainer-text p strong { color: var(--white); }
+.trainer-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.trainer-badge {
+  background: rgba(30,79,194,0.15);
+  border: 1px solid rgba(30,79,194,0.3);
+  color: rgba(255,255,255,0.8);
+  padding: 8px 16px; border-radius: 100px;
+  font-size: 12px; font-weight: 500;
+  transition: background .3s, border-color .3s;
+}
+.trainer-badge:hover { background: rgba(30,79,194,0.3); border-color: var(--cobalt); }
+
+/* ===== CORPORATE FEATURES ===== */
+.features-outer { background: linear-gradient(135deg, var(--deep) 0%, #0a1628 100%); }
+.features-list {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; margin-top: 60px;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px; overflow: hidden;
+}
+.feature-item {
+  padding: 28px 26px;
+  background: rgba(255,255,255,0.02);
+  border-right: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  transition: background .3s;
+  position: relative;
+}
+.feature-item:hover { background: rgba(201,147,58,0.06); }
+.feature-num { font-family: 'Bebas Neue'; font-size: 36px; color: rgba(201,147,58,0.2); line-height: 1; margin-bottom: 8px; }
+.feature-item h4 { font-size: 15px; font-weight: 600; margin-bottom: 8px; line-height: 1.3; }
+.feature-item p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+.feature-item:hover .feature-num { color: rgba(201,147,58,0.5); }
+
+/* ===== TESTIMONIALS ===== */
+.testimonials-outer { background: var(--navy); }
+.testimonials-slider { position: relative; overflow: hidden; margin-top: 60px; }
+.testimonials-track {
+  display: flex; gap: 24px;
+  transition: transform .6s cubic-bezier(.22,1,.36,1);
+}
+.testimonial-card {
+  min-width: calc(50% - 12px);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 40px;
+  position: relative;
+}
+.testimonial-card::before {
+  content: '"';
+  position: absolute; top: 20px; right: 30px;
+  font-family: 'Playfair Display'; font-size: 100px;
+  color: rgba(201,147,58,0.1); line-height: 1;
+}
+.stars { color: var(--gold); font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
+.testimonial-text { font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.7); margin-bottom: 28px; font-style: italic; }
+.testimonial-author { display: flex; align-items: center; gap: 16px; }
+.testimonial-avatar {
+  width: 50px; height: 50px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--royal), var(--cobalt));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 18px; overflow: hidden;
+}
+.testimonial-avatar img { width:100%; height:100%; object-fit:cover; }
+.testimonial-name { font-weight: 600; font-size: 15px; }
+.testimonial-title { font-size: 12px; color: var(--gold); }
+.testimonial-controls { display: flex; align-items: center; gap: 16px; margin-top: 32px; }
+.testimonial-btn {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  background: transparent; color: var(--white);
+  font-size: 18px; cursor: pointer;
+  transition: background .3s, border-color .3s;
+  display: flex; align-items: center; justify-content: center;
+}
+.testimonial-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+.testimonial-dots { display: flex; gap: 8px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; transition: background .3s, width .3s; }
+.dot.active { background: var(--gold); width: 24px; border-radius: 4px; }
+
+/* ===== CLIENTS ===== */
+.clients-outer { background: var(--deep); }
+.clients-logos {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 40px; margin-top: 50px;
+}
+.client-logo {
+  height: 50px;
+  filter: brightness(0) invert(1) opacity(0.35);
+  transition: filter .3s;
+}
+.client-logo:hover { filter: brightness(0) invert(1) opacity(0.8); }
+
+/* ===== GALLERY ===== */
+.gallery-outer { background: var(--navy); }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: 16px; margin-top: 50px;
+}
+.gallery-item {
+  border-radius: 8px; overflow: hidden; position: relative;
+  transition: transform .4s, box-shadow .4s;
+}
+.gallery-item:hover { transform: scale(1.02); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+.gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.gallery-item img { width:100%; height:100%; object-fit:cover; min-height: 220px; display:block; }
+.gallery-overlay {
+  position: absolute; inset: 0;
+  background: rgba(10,22,40,0.5);
+  opacity: 0; transition: opacity .3s;
+  display: flex; align-items: center; justify-content: center;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-icon { font-size: 28px; color: var(--white); }
+
+/* ===== CTA BANNER ===== */
+.cta-outer {
+  background: linear-gradient(135deg, var(--royal) 0%, var(--cobalt) 50%, var(--deep) 100%);
+  position: relative; overflow: hidden;
+}
+.cta-outer::before {
+  content:''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 100% at 80% 50%, rgba(201,147,58,0.15), transparent);
+}
+.cta-content {
+  text-align: center; position: relative; z-index:1;
+}
+.cta-content h2 {
+  font-family: 'Playfair Display'; font-size: clamp(36px,4vw,60px);
+  font-weight: 900; margin-bottom: 16px;
+}
+.cta-content p { font-size: 17px; color: rgba(255,255,255,0.7); max-width: 560px; margin: 0 auto 40px; line-height: 1.7; }
+.cta-btns { display: flex; align-items: center; justify-content: center; gap: 20px; }
+
+/* ===== CONTACT ===== */
+.contact-outer { background: var(--deep); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; }
+.contact-info h3 { font-family: 'Playfair Display'; font-size: 28px; font-weight: 700; margin-bottom: 24px; }
+.contact-info p { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 32px; }
+.contact-detail { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.contact-detail-icon {
+  width: 46px; height: 46px; border-radius: 8px;
+  background: rgba(201,147,58,0.15); border: 1px solid rgba(201,147,58,0.3);
+  display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink:0;
+}
+.contact-detail-text a, .contact-detail-text span { font-size: 15px; color: rgba(255,255,255,0.8); text-decoration: none; }
+.contact-detail-label { font-size: 11px; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.1em; }
+.contact-form { display: flex; flex-direction: column; gap: 16px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group label { font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.form-group input, .form-group textarea, .form-group select {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 14px 18px;
+  color: var(--white);
+  font-family: 'DM Sans'; font-size: 15px;
+  transition: border-color .3s, background .3s;
+  outline: none;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  border-color: rgba(201,147,58,0.5); background: rgba(201,147,58,0.04);
+}
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-group select option { background: var(--deep); }
+.form-submit {
+  background: var(--gold); color: var(--navy);
+  padding: 16px 40px; border: none; border-radius: 6px;
+  font-family: 'DM Sans'; font-size: 13px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; transition: transform .25s, box-shadow .25s;
+  align-self: flex-start;
+}
+.form-submit:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(201,147,58,0.35); }
+
+/* ===== FOOTER ===== */
+footer {
+  background: #060f1e;
+  padding: 70px 60px 30px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 50px; max-width: 1400px; margin: 0 auto 50px;
+}
+.footer-logo { font-family: 'Playfair Display'; font-size: 24px; font-weight: 900; margin-bottom: 16px; }
+.footer-logo span { display: block; font-size: 11px; font-family: 'DM Sans'; color: var(--gold); letter-spacing: 0.3em; text-transform: uppercase; margin-top: 2px; }
+.footer-about { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.8; margin-bottom: 24px; }
+.footer-socials { display: flex; gap: 12px; }
+.footer-social {
+  width: 38px; height: 38px; border-radius: 8px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; font-size: 13px; color: var(--white);
+  transition: background .3s;
+}
+.footer-social:hover { background: var(--gold); color: var(--navy); }
+.footer-col h4 { font-size: 13px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul li a { text-decoration: none; color: rgba(255,255,255,0.45); font-size: 14px; transition: color .3s, padding-left .3s; display: block; }
+.footer-col ul li a:hover { color: var(--white); padding-left: 6px; }
+.footer-bottom {
+  max-width: 1400px; margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); }
+
+/* ===== SCROLL TO TOP ===== */
+.scroll-top {
+  position: fixed; bottom: 36px; right: 36px;
+  width: 48px; height: 48px; border-radius: 8px;
+  background: var(--gold); color: var(--navy);
+  border: none; font-size: 20px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .3s, transform .3s;
+  z-index: 500;
+  box-shadow: 0 8px 24px rgba(201,147,58,0.4);
+}
+.scroll-top.visible { opacity: 1; transform: translateY(0); }
+.scroll-top:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(201,147,58,0.5); }
+
+/* ===== LOADING OVERLAY ===== */
+#loader {
+  position: fixed; inset: 0; z-index: 10000;
+  background: var(--navy);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: opacity .6s .1s, visibility .6s .1s;
+}
+#loader.done { opacity: 0; visibility: hidden; }
+.loader-text { font-family: 'Playfair Display'; font-size: 32px; font-weight: 900; letter-spacing: 0.05em; overflow: hidden; }
+.loader-text span { display: inline-block; animation: loaderChar .05s both; }
+.loader-bar { width: 200px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 24px; overflow: hidden; }
+.loader-progress { height: 100%; background: var(--gold); width: 0; animation: loadProgress 1.4s ease forwards; }
+@keyframes loadProgress { 0%{width:0} 100%{width:100%} }
+.loader-sub { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-top: 12px; }
+
+/* ===== MOBILE NAV ===== */
+.mobile-menu {
+  position: fixed; inset: 0; z-index: 900;
+  background: rgba(10,22,40,0.98);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 32px;
+  transform: translateX(100%); transition: transform .4s cubic-bezier(.22,1,.36,1);
+}
+.mobile-menu.open { transform: translateX(0); }
+.mobile-menu a { font-family: 'Playfair Display'; font-size: 32px; font-weight: 700; color: var(--white); text-decoration: none; transition: color .3s; }
+.mobile-menu a:hover { color: var(--gold); }
+.mobile-close { position: absolute; top: 24px; right: 24px; background: none; border: none; color: var(--white); font-size: 28px; cursor: pointer; }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  nav { padding: 16px 30px; }
+  nav.scrolled { padding: 12px 30px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .hero-content { grid-template-columns: 1fr; padding: 100px 30px 60px; }
+  .hero-visual { display: none; }
+  section { padding: 80px 30px; }
+  .approach-grid, .about-grid, .trainer-grid, .contact-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  .features-list { grid-template-columns: 1fr 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2,1fr); }
+  .gallery-item:nth-child(1) { grid-column: span 1; grid-row: span 1; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}
+@media(max-width:600px){
+  .features-list { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  footer { padding: 50px 24px 24px; }
+  .clients-logos { gap: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-text">
+    <span>T</span><span>h</span><span>r</span><span>i</span><span>v</span><span>e</span>
+    <span style="margin:0 8px"> </span>
+    <span>S</span><span>k</span><span>i</span><span>l</span><span>l</span><span>s</span>
+  </div>
+  <div class="loader-bar"><div class="loader-progress"></div></div>
+  <div class="loader-sub">Studio</div>
+</div>
+
+<!-- CUSTOM CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-follower"></div>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Thrive Skills<span>Studio — Shimla, HP</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#trainer">Trainer</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Book Session</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()" style="position:relative;z-index:901">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">✕</button>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#trainer" onclick="toggleMenu()">Trainer</a>
+  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="#contact" onclick="toggleMenu()" style="color:var(--gold)">Book Session →</a>
+</div>
+
+<!-- HERO -->
+<div style="position:relative;overflow:hidden">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-orbs">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-badge">✦ 20+ Years of Global Training Excellence</div>
+      <h1 class="hero-title">
+        Guiding Your<br>
+        <em>Growth</em><br>
+        Journey
+      </h1>
+      <p class="hero-subtitle">Shaping Confidence, Communication & Growth. Empowering individuals, students, and professionals to unlock their true potential.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">Book a Session →</a>
+        <a href="#services" class="btn-outline">Our Services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">5000+</div>
+          <div class="stat-label">Professionals Trained</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Cities Covered</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">20+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-line"></div>
+      <div class="hero-img-wrap">
+        <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/04/Preeti-Singh-Thrive-Skills-Studio-742x1024.png" alt="Ms. Preeti Singh – Trainer" onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600'">
+        <div class="hero-img-overlay"></div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-num">20+</div>
+        <div class="hero-card-text">Years Global<br>Experience</div>
+      </div>
+      <div class="hero-card2">
+        <div class="hero-card2-text">Global Trainer</div>
+        <div class="hero-card2-sub">India · International</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marqueeTrack">
+    <div class="marquee-item">Corporate Training</div>
+    <div class="marquee-item">Soft Skills Development</div>
+    <div class="marquee-item">Leadership Coaching</div>
+    <div class="marquee-item">Communication Excellence</div>
+    <div class="marquee-item">University Programs</div>
+    <div class="marquee-item">School Educator Training</div>
+    <div class="marquee-item">Life Coaching</div>
+    <div class="marquee-item">Personality Development</div>
+    <div class="marquee-item">Corporate Training</div>
+    <div class="marquee-item">Soft Skills Development</div>
+    <div class="marquee-item">Leadership Coaching</div>
+    <div class="marquee-item">Communication Excellence</div>
+    <div class="marquee-item">University Programs</div>
+    <div class="marquee-item">School Educator Training</div>
+    <div class="marquee-item">Life Coaching</div>
+    <div class="marquee-item">Personality Development</div>
+  </div>
+</div>
+
+<!-- APPROACH SECTION -->
+<div class="approach-outer section-outer">
+  <section id="about">
+    <div class="approach-grid">
+      <div>
+        <div class="section-label reveal">Our Approach</div>
+        <h2 class="section-title reveal">How We Create<br><em>Real Impact</em></h2>
+        <p class="section-sub reveal" style="margin-bottom:40px">We focus on practical, experiential learning that creates measurable transformation in individuals and organizations.</p>
+        <div class="approach-cards">
+          <div class="approach-card reveal">
+            <div class="approach-icon">🎯</div>
+            <div>
+              <h3>Building Future Ready Skills</h3>
+              <p>We focus on practical, real-world skills that help individuals perform, adapt, and succeed in dynamic environments.</p>
+            </div>
+          </div>
+          <div class="approach-card reveal">
+            <div class="approach-icon">🗣️</div>
+            <div>
+              <h3>Boosting Confidence & Communication</h3>
+              <p>We enable individuals to speak, present, and lead with clarity, confidence, and lasting impact.</p>
+            </div>
+          </div>
+          <div class="approach-card reveal">
+            <div class="approach-icon">🚀</div>
+            <div>
+              <h3>Creating High Performance Teams</h3>
+              <p>We build collaborative, growth-driven teams that deliver consistent results and long-term success.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="approach-img reveal-right">
+        <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/04/preeti-singh-in-office-845x1024.png" alt="Training session" onerror="this.src='https://images.unsplash.com/photo-1560439514-4e9645039924?w=600'">
+        <div class="approach-img-overlay"></div>
+        <div class="approach-img-badge">
+          <span>Certified Global Trainer</span>
+          <p>Transforming capability into confidence across India & beyond.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- WHO WE ARE -->
+<div style="background:var(--navy)" class="section-outer">
+  <section>
+    <div class="about-grid">
+      <div class="about-img reveal-left">
+        <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2025/12/0-1024x974.png" alt="Thrive Skills Studio" onerror="this.src='https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600'">
+        <div class="about-img-frame"></div>
+        <div class="about-number-badge">
+          <div class="num">100%</div>
+          <div class="lbl">Customized<br>Programs</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-label reveal">Who We Are</div>
+        <h2 class="section-title reveal">Our <em>Aspiration</em><br>& Purpose</h2>
+        <p class="reveal">At <strong>ThriveSkills</strong>, we are a growth-driven training and development organization committed to <strong>sharpening human potential and shaping future-ready professionals</strong>.</p>
+        <p class="reveal">We design and deliver <strong>high-impact soft skills and personality development programs</strong> that strengthen communication, leadership mindset, emotional intelligence, and workplace excellence.</p>
+        <p class="reveal">Our mission is to <strong>transform capability into confidence, skills into success, and ambition into sustainable achievement</strong> through experiential learning and psychologically grounded methods.</p>
+        <div class="about-highlights reveal">
+          <div class="highlight">
+            <h4>5,000+</h4>
+            <p>Professionals Trained</p>
+          </div>
+          <div class="highlight">
+            <h4>50+</h4>
+            <p>Cities Covered</p>
+          </div>
+          <div class="highlight">
+            <h4>3</h4>
+            <p>Core Programs</p>
+          </div>
+          <div class="highlight">
+            <h4>Global</h4>
+            <p>Perspective & Reach</p>
+          </div>
+        </div>
+        <a href="#contact" class="btn-primary reveal">Know More →</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- SERVICES -->
+<div class="services-outer section-outer" id="services">
+  <section>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:0">
+      <div>
+        <div class="section-label reveal">What We Offer</div>
+        <h2 class="section-title reveal">Our Core <em>Services</em></h2>
+      </div>
+      <p class="section-sub reveal" style="max-width:420px;text-align:right">Tailored training programs designed for every stage of professional growth.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-img">
+          <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/03/corporate-2.png" alt="Corporate Training" onerror="this.src='https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600'">
+          <div class="service-img-overlay"></div>
+          <div class="service-num">01</div>
+        </div>
+        <div class="service-body">
+          <div class="service-tag">Corporate</div>
+          <h3>Corporate Training & Capability Development</h3>
+          <p>Building emotionally resilient, mentally fit, and high-performing teams. New-age leadership, influence skills, accountability, and ownership culture.</p>
+          <a href="#contact" class="service-link">Explore Program →</a>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-img">
+          <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/04/university-6.png" alt="University Training" onerror="this.src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600'">
+          <div class="service-img-overlay"></div>
+          <div class="service-num">02</div>
+        </div>
+        <div class="service-body">
+          <div class="service-tag">Higher Education</div>
+          <h3>University & College Training Programs</h3>
+          <p>Bridging the gap between academic learning and real-world corporate expectations. Building professional conduct, workplace presence, and corporate confidence.</p>
+          <a href="#contact" class="service-link">Explore Program →</a>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-img">
+          <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2025/12/bz-2.png" alt="School Training" onerror="this.src='https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600'">
+          <div class="service-img-overlay"></div>
+          <div class="service-num">03</div>
+        </div>
+        <div class="service-body">
+          <div class="service-tag">Education</div>
+          <h3>School & Educator Training Programs</h3>
+          <p>Practical strategies to align teaching practices with NEP 2020 vision and competencies. Building structured, engaging, and psychologically safe classrooms.</p>
+          <a href="#contact" class="service-link">Explore Program →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- CORPORATE FEATURES -->
+<div class="features-outer section-outer">
+  <section>
+    <div class="section-label reveal">Corporate Training</div>
+    <h2 class="section-title reveal">15 Key <em>Capabilities</em> We Build</h2>
+    <div class="features-list">
+      <div class="feature-item reveal"><div class="feature-num">01</div><h4>Emotional Intelligence & Workplace Well-Being</h4><p>Building emotionally resilient, mentally fit, and high-performing teams.</p></div>
+      <div class="feature-item reveal"><div class="feature-num">02</div><h4>Leadership Mindset & People Management</h4><p>New-age leadership, influence skills, accountability, and ownership culture.</p></div>
+      <div class="feature-item reveal"><div class="feature-num">03</div><h4>Communication Excellence & Executive Presence</h4><p>Business etiquette, assertiveness, and impact speaking.</p></div>
+      <div class="feature-item reveal"><div class="feature-num">04</div><h4>High-Performance Culture & Productivity</h4><p>Focus, discipline, accountability, and results-driven work habits.</p></div>
+      <div class="feature-item reveal"><div class="feature-num">05</div><h4>Team Effectiveness & Collaboration</h4><p>Trust building, cross-functional collaboration, and psychological safety.</p></div>
+      <div class="feature-item reveal"><div class="feature-num">06</div><h4>Conflict Management & Difficult Conversations</h4><p>Workplace harmony, negotiation skills, and resolution frameworks.</p></div>
+      <div class="feature-item reveal"><div class="feature-num">07</div><h4>Change Agility & Growth Mindset</h4><p>Adaptability, learning agility, and future-readiness for evolving roles.</p></div>
+      <div class="feature-item reveal"><div class="feature-num">08</div><h4>Stress Management & Burnout Prevention</h4><p>Energy management, emotional regulation, and mental fitness at work.</p></div>
+      <div class="feature-item reveal"><div class="feature-num">09</div><h4>Decision-Making & Critical Thinking</h4><p>Structured thinking, business judgment, and bias-free decisions.</p></div>
+      <div class="feature-item reveal"><div class="feature-num">10</div><h4>Employee Engagement & Motivation Science</h4><p>Ownership culture, intrinsic motivation, and performance psychology.</p></div>
+      <div class="feature-item reveal"><div class="feature-num">11</div><h4>DEI & Cultural Intelligence</h4><p>Inclusive leadership, cross-cultural sensitivity, and global harmony.</p></div>
+      <div class="feature-item reveal"><div class="feature-num">12</div><h4>Upskilling, Reskilling & Career Acceleration</h4><p>Future skills, professional identity, and continuous development culture.</p></div>
+      <div class="feature-item reveal"><div class="feature-num">13</div><h4>Gen Z Workforce Management</h4><p>Managing multi-generational teams and workplace alignment.</p></div>
+      <div class="feature-item reveal"><div class="feature-num">14</div><h4>Business Ethics & Professional Conduct</h4><p>Integrity at work, corporate values, accountability, and compliance culture.</p></div>
+      <div class="feature-item reveal"><div class="feature-num">15</div><h4>Customer Experience & Service Excellence</h4><p>Client centricity, relationship management, and service mindset transformation.</p></div>
+    </div>
+    <div style="text-align:center;margin-top:40px" class="reveal">
+      <a href="#contact" class="btn-primary">Design Your Training Program →</a>
+    </div>
+  </section>
+</div>
+
+<!-- TRAINER SECTION -->
+<div style="background:var(--navy)" class="section-outer">
+  <section id="trainer">
+    <div class="trainer-grid">
+      <div class="trainer-img reveal-left">
+        <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/04/preeti-singh-in-office-845x1024.png" alt="Ms. Preeti Singh" onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600'">
+        <div class="trainer-social">
+          <a href="http://linkedin.com/in/preeti-singh-b71653133" target="_blank" title="LinkedIn">in</a>
+          <a href="https://www.instagram.com/thriveskillsstudio" target="_blank" title="Instagram">ig</a>
+          <a href="https://www.facebook.com/profile.php?id=61586336128257" target="_blank" title="Facebook">fb</a>
+          <a href="https://www.youtube.com/@ThriveSkillsStudio" target="_blank" title="YouTube">yt</a>
+        </div>
+        <div class="trainer-quote">
+          <p>"Empowering people is not my profession — it is my purpose."</p>
+        </div>
+      </div>
+      <div class="trainer-text">
+        <div class="section-label reveal">Our Leadership</div>
+        <div class="trainer-role reveal">Global Trainer | Certified Life Coach | Career & Leadership Mentor</div>
+        <h2 class="reveal" style="font-family:'Playfair Display';font-size:clamp(36px,3vw,52px);font-weight:900;line-height:1.1;margin-bottom:24px">Ms. <em style="color:var(--gold);font-style:italic">Preeti</em><br>Singh</h2>
+        <p class="reveal">With over <strong>20 years of global training experience</strong>, Ms. Preeti Singh is a dynamic learning leader specializing in <strong>soft skills, leadership development, and personality transformation</strong> across corporate and educational ecosystems.</p>
+        <p class="reveal">She is an expert in delivering <strong>customized training solutions</strong> for corporates and institutions, building online and offline learning platforms, and providing strategic guidance to trainers and participants.</p>
+        <p class="reveal">Her expertise spans <strong>instructional design, curriculum architecture, assessment frameworks, and impact evaluation</strong>, ensuring every program delivers measurable growth.</p>
+        <p class="reveal">An <strong>avid traveller and cultural explorer</strong>, she integrates global perspectives into her training methodology, hosting national and international programs and cultural exchange initiatives.</p>
+        <div class="trainer-badges reveal">
+          <span class="trainer-badge">Soft Skills Expert</span>
+          <span class="trainer-badge">Leadership Development</span>
+          <span class="trainer-badge">Personality Transformation</span>
+          <span class="trainer-badge">Life Coach</span>
+          <span class="trainer-badge">NEP 2020 Expert</span>
+          <span class="trainer-badge">Cross-Cultural Trainer</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="testimonials-outer section-outer">
+  <section>
+    <div class="section-label reveal">Testimonials</div>
+    <h2 class="section-title reveal">Trusted by <em>Professionals</em><br>Worldwide</h2>
+    <div class="testimonials-slider">
+      <div class="testimonials-track" id="testimonialsTrack">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">I am a homemaker, and when I decided to start a small-scale business, a friend suggested that I attend Ms. Preeti's soft skills session. It turned out to be a turning point — her session helped me take the first step towards my entrepreneurial journey.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">A</div>
+            <div>
+              <div class="testimonial-name">Ms. Alexsandra</div>
+              <div class="testimonial-title">Entrepreneur</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">Ms. Preeti Singh is a great mentor. She has vast knowledge and a strong understanding of NEP 2020. I have attended her workshop, and the connection she builds with participants is incredible. Truly inspiring.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">G</div>
+            <div>
+              <div class="testimonial-name">Ms. Gurpreet Kaur</div>
+              <div class="testimonial-title">Workshop Participant</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">As the Senior Coordinator, it was a wonderful experience working with Ms. Preeti. Her communication was exceptional, and her training sessions beautifully blended the cultural perspectives of both India and Germany. True cross-cultural understanding.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">N</div>
+            <div>
+              <div class="testimonial-name">Ms. Natalia Muller</div>
+              <div class="testimonial-title">Senior Coordinator, Germany</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">Ms. Preeti conducted a session on Business Ethics for our team at Bajaj Allianz, and it was truly insightful. The way she connected real-world scenarios, practical skills, and brainstorming activities made complex ideas feel simple yet powerful.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">A</div>
+            <div>
+              <div class="testimonial-name">Ms. Ashima Puri</div>
+              <div class="testimonial-title">Manager, Bajaj Allianz</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-controls">
+      <button class="testimonial-btn" onclick="slideTestimonials(-1)">←</button>
+      <button class="testimonial-btn" onclick="slideTestimonials(1)">→</button>
+      <div class="testimonial-dots" id="testimDots">
+        <div class="dot active" onclick="goTestimonial(0)"></div>
+        <div class="dot" onclick="goTestimonial(1)"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- CLIENTS -->
+<div class="clients-outer section-outer">
+  <section>
+    <div class="section-label reveal" style="justify-content:center">Companies We've Worked With</div>
+    <h2 class="section-title reveal" style="text-align:center">Trusted by <em>Leading</em><br>Organizations</h2>
+    <div class="clients-logos">
+      <img class="client-logo" src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/03/Bajaj-Allianz-Insurance-Logo-e1773913125419.avif" alt="Bajaj Allianz" onerror="this.style.display='none'">
+      <img class="client-logo" src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/03/Estreet-Final-Logo-0.png" alt="Estreet" onerror="this.style.display='none'">
+      <img class="client-logo" src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/03/work.png" alt="Client" onerror="this.style.display='none'">
+      <img class="client-logo" src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/03/home_logo.webp" alt="Client" onerror="this.style.display='none'">
+    </div>
+  </section>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery-outer section-outer" id="gallery">
+  <section>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:50px">
+      <div>
+        <div class="section-label reveal">Gallery</div>
+        <h2 class="section-title reveal">Our <em>Journey</em><br>In Action</h2>
+      </div>
+      <a href="#contact" class="btn-outline reveal">View All →</a>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal">
+        <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2025/12/Rectangle-21.png" alt="Gallery" onerror="this.src='https://images.unsplash.com/photo-1560439514-4e9645039924?w=600'">
+        <div class="gallery-overlay"><div class="gallery-icon">+</div></div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2025/12/Rectangle-20.png" alt="Gallery" onerror="this.src='https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600'">
+        <div class="gallery-overlay"><div class="gallery-icon">+</div></div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2025/12/Rectangle-22-798x1024.png" alt="Gallery" onerror="this.src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600'">
+        <div class="gallery-overlay"><div class="gallery-icon">+</div></div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2025/12/Rectangle-24.png" alt="Gallery" onerror="this.src='https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600'">
+        <div class="gallery-overlay"><div class="gallery-icon">+</div></div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2025/12/Rectangle-23.png" alt="Gallery" onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600'">
+        <div class="gallery-overlay"><div class="gallery-icon">+</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- CTA BANNER -->
+<div class="cta-outer section-outer">
+  <section>
+    <div class="cta-content">
+      <div class="section-label reveal" style="justify-content:center">Ready to Transform?</div>
+      <h2 class="reveal">Empowering Skills<br>for <em style="color:var(--gold-light)">Career Growth</em></h2>
+      <p class="reveal">Thrive Skills Studio provides professional training and corporate skill development programs designed to help individuals and organizations grow.</p>
+      <div class="cta-btns reveal">
+        <a href="#contact" class="btn-primary">Book Consultation Now →</a>
+        <a href="tel:8191900051" class="btn-outline">📞 8191900051</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-outer section-outer" id="contact">
+  <section>
+    <div class="section-label reveal">Get In Touch</div>
+    <h2 class="section-title reveal">Let's Start Your <em>Growth</em><br>Journey Together</h2>
+    <div class="contact-grid" style="margin-top:50px">
+      <div class="reveal-left">
+        <h3>Contact Information</h3>
+        <p>We are committed to processing the information in order to contact you and talk about your training needs.</p>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">✉️</div>
+          <div>
+            <div class="contact-detail-label">Email</div>
+            <a href="mailto:preeti@thriveskillsstudio.com" class="contact-detail-text">preeti@thriveskillsstudio.com</a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📞</div>
+          <div>
+            <div class="contact-detail-label">Phone</div>
+            <a href="tel:8191900051" class="contact-detail-text">8191900051</a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📍</div>
+          <div>
+            <div class="contact-detail-label">Location</div>
+            <span class="contact-detail-text">Shimla, Himachal Pradesh, India</span>
+          </div>
+        </div>
+        <div style="margin-top:32px">
+          <p style="font-size:13px;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px">Follow Us</p>
+          <div style="display:flex;gap:12px">
+            <a href="https://www.instagram.com/thriveskillsstudio" target="_blank" style="width:42px;height:42px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:var(--white);text-decoration:none;font-size:12px;font-weight:600;transition:background .3s" onmouseover="this.style.background='var(--gold)';this.style.color='var(--navy)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='var(--white)'">IG</a>
+            <a href="https://www.linkedin.com/in/preeti-singh-b71653133/" target="_blank" style="width:42px;height:42px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:var(--white);text-decoration:none;font-size:12px;font-weight:600;transition:background .3s" onmouseover="this.style.background='var(--gold)';this.style.color='var(--navy)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='var(--white)'">LI</a>
+            <a href="https://www.facebook.com/profile.php?id=61586336128257" target="_blank" style="width:42px;height:42px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:var(--white);text-decoration:none;font-size:12px;font-weight:600;transition:background .3s" onmouseover="this.style.background='var(--gold)';this.style.color='var(--navy)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='var(--white)'">FB</a>
+            <a href="https://www.youtube.com/@ThriveSkillsStudio" target="_blank" style="width:42px;height:42px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:var(--white);text-decoration:none;font-size:12px;font-weight:600;transition:background .3s" onmouseover="this.style.background='var(--gold)';this.style.color='var(--navy)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='var(--white)'">YT</a>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="contact-form">
+          <div class="form-row">
+            <div class="form-group"><label>Your Name</label><input type="text" placeholder="Ms. Priya Sharma"></div>
+            <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+91 98765 43210"></div>
+          </div>
+          <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@company.com"></div>
+          <div class="form-group">
+            <label>Interested In</label>
+            <select>
+              <option value="">Select a Program</option>
+              <option>Corporate Training & Capability Development</option>
+              <option>University & College Training Programs</option>
+              <option>School & Educator Training Programs</option>
+              <option>Life Coaching / Personal Mentoring</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your training requirements..."></textarea></div>
+          <button class="form-submit">Send Message →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">Thrive Skills Studio<span>Shaping Global Professionals</span></div>
+      <p class="footer-about">At Thrive Skills Studio, we empower individuals and organizations to achieve their professional dreams through transformative learning experiences.</p>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/thriveskillsstudio" target="_blank" class="footer-social">ig</a>
+        <a href="https://www.linkedin.com/in/preeti-singh-b71653133/" target="_blank" class="footer-social">in</a>
+        <a href="https://www.facebook.com/profile.php?id=61586336128257" target="_blank" class="footer-social">fb</a>
+        <a href="https://www.youtube.com/@ThriveSkillsStudio" target="_blank" class="footer-social">yt</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#trainer">Our Trainer</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Corporate Training</a></li>
+        <li><a href="#services">University Programs</a></li>
+        <li><a href="#services">School Educator Programs</a></li>
+        <li><a href="#contact">Book a Session</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:preeti@thriveskillsstudio.com">preeti@thriveskillsstudio.com</a></li>
+        <li><a href="tel:8191900051">8191900051</a></li>
+        <li><a href="#">Shimla, Himachal Pradesh</a></li>
+        <li><a href="https://www.thriveskillsstudio.com">thriveskillsstudio.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Thrive Skills Studio. All Rights Reserved.</p>
+    <p style="color:rgba(255,255,255,0.2)">Crafted with ♥ for Global Excellence</p>
+  </div>
+</footer>
+
+<script>
+/* ===== LOADER ===== */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('done');
+  }, 1600);
+});
+
+/* ===== CURSOR ===== */
+const cursor = document.getElementById('cursor');
+const follower = document.getElementById('cursor-follower');
+let mx = 0, my = 0, fx = 0, fy = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animCursor() {
+  cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+  fx += (mx - fx) * 0.12; fy += (my - fy) * 0.12;
+  follower.style.left = fx + 'px'; follower.style.top = fy + 'px';
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+document.querySelectorAll('a,button,.service-card,.approach-card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.width = '20px'; cursor.style.height = '20px';
+    follower.style.width = '60px'; follower.style.height = '60px';
+    follower.style.borderColor = 'rgba(201,147,58,0.8)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.width = '12px'; cursor.style.height = '12px';
+    follower.style.width = '40px'; follower.style.height = '40px';
+    follower.style.borderColor = 'rgba(201,147,58,0.5)';
+  });
+});
+
+/* ===== NAV SCROLL ===== */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+  document.querySelector('.scroll-top').classList.toggle('visible', window.scrollY > 400);
+});
+
+/* ===== MOBILE MENU ===== */
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+/* ===== SCROLL REVEAL ===== */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), entry.target.dataset.delay || 0);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach((el, i) => {
+  el.dataset.delay = (i % 5) * 80;
+  observer.observe(el);
+});
+
+/* ===== TESTIMONIALS SLIDER ===== */
+let currentSlide = 0;
+const track = document.getElementById('testimonialsTrack');
+const cards = track.querySelectorAll('.testimonial-card');
+const dots = document.querySelectorAll('.dot');
+const totalSlides = Math.ceil(cards.length / 2);
+
+function updateSlider() {
+  const cardWidth = cards[0].offsetWidth + 24;
+  track.style.transform = `translateX(-${currentSlide * cardWidth * 2}px)`;
+  dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+}
+function slideTestimonials(dir) {
+  currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
+  updateSlider();
+}
+function goTestimonial(i) { currentSlide = i; updateSlider(); }
+window.addEventListener('resize', updateSlider);
+
+/* ===== MAGNETIC BUTTONS ===== */
+document.querySelectorAll('.btn-primary,.btn-outline,.nav-cta').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const r = btn.getBoundingClientRect();
+    const x = e.clientX - r.left - r.width/2;
+    const y = e.clientY - r.top - r.height/2;
+    btn.style.transform = `translate(${x*0.18}px, ${y*0.18}px)`;
+  });
+  btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+});
+
+/* ===== COUNTER ANIMATION ===== */
+function animateCounters() {
+  document.querySelectorAll('.stat-num').forEach(el => {
+    const target = parseFloat(el.textContent);
+    if (isNaN(target)) return;
+    const suffix = el.textContent.replace(/[\d.]/g,'');
+    let start = 0;
+    const step = target / 60;
+    const timer = setInterval(() => {
+      start = Math.min(start + step, target);
+      el.textContent = (Number.isInteger(target) ? Math.floor(start) : start.toFixed(0)) + suffix;
+      if (start >= target) clearInterval(timer);
+    }, 25);
+  });
+}
+const statsObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { animateCounters(); statsObserver.disconnect(); } });
+}, { threshold: 0.5 });
+const statsEl = document.querySelector('.hero-stats');
+if (statsEl) statsObserver.observe(statsEl);
+
+/* ===== PARALLAX ORBS ON MOUSE ===== */
+document.addEventListener('mousemove', e => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 20;
+  const y = (e.clientY / window.innerHeight - 0.5) * 20;
+  document.querySelectorAll('.orb').forEach((orb, i) => {
+    const factor = (i + 1) * 0.5;
+    orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+  });
+});
+
+/* ===== AUTO TESTIMONIAL ===== */
+setInterval(() => slideTestimonials(1), 6000);
+</script>
+</body>
+</html>
