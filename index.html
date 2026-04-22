@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="Thrive Skills Studio – Shaping Global Professionals. Corporate Training, University & College Programs, School & Educator Training by Ms. Preeti Singh.">
+<meta name="keywords" content="soft skills training, corporate training, leadership development, communication training, Shimla, Himachal Pradesh">
+<title>Thrive Skills Studio | Shaping Global Professionals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─── */
+:root{
+  --navy:#07121f;
+  --deep:#0b1a2d;
+  --royal:#122848;
+  --cobalt:#1a4fc4;
+  --sky:#2563eb;
+  --gold:#c9933a;
+  --gold-lt:#f0b94a;
+  --cream:#f8f4ef;
+  --white:#ffffff;
+  --gray:#8a96a8;
+  --light:#d6dde8;
+  --accent:#e8572a;
+  --radius:10px;
+  --nav-h:72px;
+}
+
+/* ─── RESET ─── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;line-height:1.6}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:inherit}
+
+/* ─── CURSOR (desktop only) ─── */
+@media(pointer:fine){
+  body{cursor:none}
+  #cur,#cur-f{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+  #cur{width:10px;height:10px;background:var(--gold);transition:width .2s,height .2s,background .2s}
+  #cur-f{width:38px;height:38px;border:1.5px solid rgba(201,147,58,.45);z-index:9998;transition:width .3s,height .3s,border-color .3s}
+}
+
+/* ─── LOADER ─── */
+#loader{position:fixed;inset:0;z-index:10000;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .6s .1s,visibility .6s .1s}
+#loader.done{opacity:0;visibility:hidden}
+.ld-logo{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,36px);font-weight:900;letter-spacing:.03em}
+.ld-bar{width:160px;height:2px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
+.ld-prog{height:100%;background:var(--gold);width:0;animation:ldprog 1.5s ease forwards}
+@keyframes ldprog{0%{width:0}100%{width:100%}}
+.ld-sub{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold)}
+
+/* ─── SCROLL-TOP ─── */
+#stb{position:fixed;bottom:24px;right:20px;width:44px;height:44px;border-radius:var(--radius);background:var(--gold);color:var(--navy);border:none;font-size:18px;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(16px);transition:opacity .3s,transform .3s;z-index:800;box-shadow:0 6px 20px rgba(201,147,58,.4)}
+#stb.vis{opacity:1;transform:translateY(0)}
+#stb:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(201,147,58,.5)}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:700;height:var(--nav-h);display:flex;align-items:center;padding:0 clamp(20px,5vw,64px);justify-content:space-between;transition:background .4s,box-shadow .4s}
+nav.stuck{background:rgba(7,18,31,.97);backdrop-filter:blur(14px);box-shadow:0 2px 32px rgba(0,0,0,.4)}
+.nav-brand{display:flex;flex-direction:column;line-height:1;gap:3px}
+.nav-brand strong{font-family:'Playfair Display',serif;font-size:clamp(16px,2.2vw,20px);font-weight:900;white-space:nowrap}
+.nav-brand span{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.nav-links{display:flex;align-items:center;gap:clamp(18px,2.5vw,34px);list-style:none}
+.nav-links a{font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.75);position:relative;transition:color .3s;white-space:nowrap}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--gold);transition:width .3s}
+.nav-links a:hover,.nav-links a:focus{color:var(--gold)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--gold);color:var(--navy) !important;padding:9px 20px;border-radius:4px;font-weight:700 !important;transition:transform .22s,box-shadow .22s !important}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(201,147,58,.4)}
+.nav-cta::after{display:none !important}
+.nav-tel{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.06em;white-space:nowrap}
+/* hamburger */
+.ham{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;z-index:702}
+.ham span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:.3s}
+.ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.ham.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+/* mobile drawer */
+.mob-drawer{position:fixed;inset:0;z-index:701;background:rgba(7,18,31,.98);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transform:translateX(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);padding:40px 24px}
+.mob-drawer.open{transform:translateX(0)}
+.mob-drawer a{font-family:'Playfair Display',serif;font-size:clamp(26px,6vw,38px);font-weight:700;color:var(--white);text-align:center;transition:color .3s}
+.mob-drawer a:hover{color:var(--gold)}
+.mob-drawer .mob-cta{font-size:clamp(18px,4vw,24px);color:var(--gold) !important;font-family:'DM Sans',sans-serif;font-weight:700;letter-spacing:.08em}
+.mob-tel{font-size:14px;color:rgba(255,255,255,.45);margin-top:12px;letter-spacing:.05em}
+
+/* ─── HERO ─── */
+.hero{min-height:100dvh;position:relative;display:flex;align-items:center;overflow:hidden;padding-top:var(--nav-h)}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 80% at 65% 40%,rgba(26,79,196,.13) 0%,transparent 65%),radial-gradient(ellipse 45% 55% at 5% 85%,rgba(201,147,58,.07) 0%,transparent 55%)}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:72px 72px;animation:gridmove 24s linear infinite}
+@keyframes gridmove{0%{background-position:0 0}100%{background-position:72px 72px}}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;animation:orbf 7s ease-in-out infinite}
+.o1{width:clamp(200px,30vw,420px);height:clamp(200px,30vw,420px);background:var(--cobalt);opacity:.11;top:-80px;right:8%;animation-delay:0s}
+.o2{width:clamp(150px,22vw,320px);height:clamp(150px,22vw,320px);background:var(--gold);opacity:.08;bottom:-60px;left:2%;animation-delay:3s}
+.o3{width:clamp(100px,15vw,220px);height:clamp(100px,15vw,220px);background:var(--sky);opacity:.07;top:42%;right:28%;animation-delay:5s}
+@keyframes orbf{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-28px) scale(1.04)}}
+
+.hero-inner{position:relative;z-index:2;width:100%;max-width:1400px;margin:0 auto;padding:clamp(40px,8vw,90px) clamp(20px,5vw,64px);display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:clamp(30px,5vw,80px)}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(201,147,58,.11);border:1px solid rgba(201,147,58,.28);padding:7px 16px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:22px;opacity:0;animation:fup .7s .2s forwards}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(40px,5.5vw,82px);font-weight:900;line-height:1.05;margin-bottom:18px;opacity:0;animation:fup .7s .38s forwards}
+.hero-h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:clamp(14px,1.5vw,17px);line-height:1.75;color:rgba(255,255,255,.62);max-width:520px;margin-bottom:36px;opacity:0;animation:fup .7s .55s forwards}
+.hero-btns{display:flex;align-items:center;gap:16px;flex-wrap:wrap;opacity:0;animation:fup .7s .72s forwards}
+.btn-p{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy);padding:clamp(12px,1.5vw,16px) clamp(22px,2.5vw,36px);border-radius:4px;font-weight:700;font-size:clamp(11px,1.1vw,13px);letter-spacing:.12em;text-transform:uppercase;transition:transform .22s,box-shadow .22s;position:relative;overflow:hidden;white-space:nowrap}
+.btn-p::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.14),transparent);opacity:0;transition:opacity .3s}
+.btn-p:hover{transform:translateY(-3px);box-shadow:0 14px 38px rgba(201,147,58,.35)}
+.btn-p:hover::after{opacity:1}
+.btn-o{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(255,255,255,.22);color:var(--white);padding:clamp(11px,1.4vw,15px) clamp(20px,2.3vw,34px);border-radius:4px;font-weight:500;font-size:clamp(11px,1.1vw,13px);letter-spacing:.09em;text-transform:uppercase;transition:border-color .3s,background .3s;white-space:nowrap}
+.btn-o:hover{border-color:var(--white);background:rgba(255,255,255,.06)}
+.hero-stats{display:flex;gap:clamp(24px,4vw,44px);margin-top:48px;opacity:0;animation:fup .7s .9s forwards;flex-wrap:wrap}
+.hs-num{font-family:'Bebas Neue',cursive;font-size:clamp(36px,4vw,50px);color:var(--gold);line-height:1}
+.hs-lbl{font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+/* hero visual */
+.hero-visual{position:relative;opacity:0;animation:fright .85s .5s forwards}
+@keyframes fright{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+.hv-img{border-radius:var(--radius);overflow:hidden;position:relative;box-shadow:0 40px 80px rgba(0,0,0,.45)}
+.hv-img img{width:100%;height:clamp(380px,50vw,600px);object-fit:cover;object-position:top center}
+.hv-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(7,18,31,.18),transparent 60%);border-radius:var(--radius)}
+.hv-card{position:absolute;bottom:-16px;left:-24px;background:rgba(255,255,255,.07);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.12);padding:18px 22px;border-radius:var(--radius);animation:fc1 4s ease-in-out infinite}
+@keyframes fc1{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hv-card .n{font-family:'Bebas Neue';font-size:34px;color:var(--gold);line-height:1}
+.hv-card .t{font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+.hv-tag{position:absolute;top:24px;right:-16px;background:var(--gold);color:var(--navy);padding:14px 18px;border-radius:var(--radius);animation:fc2 4s 2s ease-in-out infinite}
+@keyframes fc2{0%,100%{transform:rotate(2deg)}50%{transform:rotate(2deg) translateY(-10px)}}
+.hv-tag .a{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.hv-tag .b{font-size:9px;color:rgba(10,22,40,.6);margin-top:2px}
+
+/* ─── MARQUEE ─── */
+.mq-outer{background:var(--gold);padding:14px 0;overflow:hidden}
+.mq-track{display:flex;animation:mqs 22s linear infinite;white-space:nowrap}
+.mq-item{font-family:'Bebas Neue',cursive;font-size:17px;letter-spacing:.18em;color:var(--navy);padding:0 36px;flex-shrink:0}
+.mq-item::after{content:'◆';margin-left:36px;opacity:.35}
+@keyframes mqs{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ─── SECTION BASE ─── */
+.sec{padding:clamp(70px,9vw,120px) clamp(20px,5vw,64px);max-width:1400px;margin:0 auto}
+.sec-out{position:relative;overflow:hidden}
+.sec-lbl{font-size:10px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:12px}
+.sec-lbl::before{content:'';width:26px;height:1.5px;background:var(--gold);flex-shrink:0}
+.sec-h{font-family:'Playfair Display',serif;font-size:clamp(30px,3.8vw,58px);font-weight:900;line-height:1.1;margin-bottom:16px}
+.sec-h em{font-style:italic;color:var(--gold)}
+.sec-p{font-size:clamp(14px,1.4vw,16px);color:rgba(255,255,255,.52);line-height:1.8;max-width:560px}
+
+/* ─── REVEAL ─── */
+.rv{opacity:0;transform:translateY(36px);transition:opacity .75s,transform .75s}
+.rv.on{opacity:1;transform:translateY(0)}
+.rv-l{opacity:0;transform:translateX(-44px);transition:opacity .75s,transform .75s}
+.rv-l.on{opacity:1;transform:translateX(0)}
+.rv-r{opacity:0;transform:translateX(44px);transition:opacity .75s,transform .75s}
+.rv-r.on{opacity:1;transform:translateX(0)}
+@keyframes fup{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─── APPROACH ─── */
+.app-bg{background:var(--deep)}
+.app-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,80px);align-items:center}
+.app-cards{display:flex;flex-direction:column;gap:18px}
+.app-card{border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:clamp(18px,2.5vw,28px);background:rgba(255,255,255,.025);display:flex;align-items:flex-start;gap:18px;transition:border-color .3s,background .3s,transform .3s}
+.app-card:hover{border-color:rgba(201,147,58,.38);background:rgba(201,147,58,.04);transform:translateX(6px)}
+.app-icon{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,rgba(201,147,58,.18),rgba(26,79,196,.18));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.app-card h3{font-size:clamp(14px,1.4vw,17px);font-weight:600;margin-bottom:5px}
+.app-card p{font-size:clamp(13px,1.2vw,14px);color:rgba(255,255,255,.52);line-height:1.65}
+.app-img{position:relative;border-radius:var(--radius);overflow:hidden}
+.app-img img{width:100%;height:clamp(340px,42vw,520px);object-fit:cover;object-position:center top;border-radius:var(--radius);filter:brightness(.88) saturate(1.1)}
+.app-img-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,18,31,.55) 0%,transparent 50%)}
+.app-badge{position:absolute;bottom:22px;left:22px;right:22px;background:rgba(7,18,31,.88);backdrop-filter:blur(18px);border:1px solid rgba(201,147,58,.28);border-radius:var(--radius);padding:16px 20px}
+.app-badge p{font-size:clamp(13px,1.2vw,15px);font-weight:600;line-height:1.4}
+.app-badge span{font-size:10px;color:var(--gold);letter-spacing:.14em;text-transform:uppercase}
+
+/* ─── ABOUT ─── */
+.abt-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(30px,6vw,80px);align-items:center}
+.abt-img{position:relative}
+.abt-img img{width:100%;height:clamp(360px,45vw,580px);object-fit:cover;object-position:top;border-radius:var(--radius);box-shadow:0 30px 60px rgba(0,0,0,.3)}
+.abt-frame{position:absolute;top:-16px;left:-16px;right:16px;bottom:16px;border:2px solid rgba(201,147,58,.22);border-radius:var(--radius);z-index:-1;pointer-events:none}
+.abt-badge{position:absolute;top:28px;right:-16px;background:var(--gold);color:var(--navy);padding:14px 16px;border-radius:var(--radius);text-align:center;animation:fc1 5s ease-in-out infinite}
+.abt-badge .n{font-family:'Bebas Neue';font-size:30px;line-height:1}
+.abt-badge .l{font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.3}
+.abt-text p{font-size:clamp(13px,1.3vw,16px);line-height:1.85;color:rgba(255,255,255,.68);margin-bottom:18px}
+.abt-text p strong{color:var(--white);font-weight:600}
+.abt-hi{display:flex;gap:clamp(16px,2.5vw,28px);margin:28px 0;flex-wrap:wrap}
+.hi{border-left:3px solid var(--gold);padding-left:14px}
+.hi h4{font-family:'Bebas Neue',cursive;font-size:clamp(28px,3vw,40px);color:var(--gold);line-height:1}
+.hi p{font-size:10px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.12em;margin-top:2px}
+
+/* ─── SERVICES ─── */
+.srv-bg{background:var(--deep)}
+.srv-head{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:clamp(30px,4vw,56px)}
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px)}
+.srv-card{border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);overflow:hidden;background:rgba(255,255,255,.02);transition:transform .4s cubic-bezier(.22,1,.36,1),border-color .3s,box-shadow .4s;position:relative}
+.srv-card:hover{transform:translateY(-10px);border-color:rgba(201,147,58,.38);box-shadow:0 28px 56px rgba(0,0,0,.28),0 0 0 1px rgba(201,147,58,.12)}
+.srv-img{height:clamp(180px,22vw,230px);overflow:hidden;position:relative}
+.srv-img img{width:100%;height:100%;object-fit:cover;transition:transform .55s}
+.srv-card:hover .srv-img img{transform:scale(1.06)}
+.srv-img-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,18,31,.65) 0%,transparent 60%)}
+.srv-num{position:absolute;top:14px;right:14px;font-family:'Bebas Neue';font-size:42px;color:rgba(255,255,255,.12);line-height:1}
+.srv-body{padding:clamp(20px,2.5vw,28px)}
+.srv-tag{font-size:9px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.srv-body h3{font-family:'Playfair Display',serif;font-size:clamp(17px,1.8vw,22px);font-weight:700;margin-bottom:10px;line-height:1.25}
+.srv-body p{font-size:clamp(12px,1.2vw,14px);color:rgba(255,255,255,.52);line-height:1.7;margin-bottom:22px}
+.srv-link{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);transition:gap .3s}
+.srv-link:hover{gap:14px}
+.srv-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--cobalt));transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.srv-card:hover::after{transform:scaleX(1)}
+
+/* ─── FEATURES ─── */
+.ft-bg{background:linear-gradient(160deg,var(--deep) 0%,var(--navy) 100%)}
+.ft-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:clamp(30px,4vw,56px);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);overflow:hidden}
+.ft-item{padding:clamp(18px,2.5vw,28px);background:rgba(255,255,255,.02);border-right:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);transition:background .3s}
+.ft-item:hover{background:rgba(201,147,58,.05)}
+.ft-n{font-family:'Bebas Neue';font-size:34px;color:rgba(201,147,58,.18);line-height:1;margin-bottom:6px;transition:color .3s}
+.ft-item:hover .ft-n{color:rgba(201,147,58,.45)}
+.ft-item h4{font-size:clamp(12px,1.2vw,15px);font-weight:600;margin-bottom:6px;line-height:1.3}
+.ft-item p{font-size:clamp(11px,1vw,13px);color:rgba(255,255,255,.42);line-height:1.6}
+.ft-cta{text-align:center;margin-top:clamp(24px,3vw,40px)}
+
+/* ─── TRAINER ─── */
+.tr-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(30px,6vw,80px);align-items:center}
+.tr-img{position:relative}
+.tr-img img{width:100%;height:clamp(380px,48vw,620px);object-fit:cover;object-position:top;border-radius:var(--radius);filter:contrast(1.04)}
+.tr-socials{position:absolute;right:-18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px}
+.tr-soc{width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:var(--white);font-size:11px;font-weight:700;letter-spacing:.04em;transition:background .3s,border-color .3s,transform .3s}
+.tr-soc:hover{background:var(--gold);border-color:var(--gold);color:var(--navy);transform:scale(1.1)}
+.tr-quote{position:absolute;bottom:28px;left:-18px;right:44px;background:var(--royal);border-left:4px solid var(--gold);padding:18px 22px;border-radius:0 var(--radius) var(--radius) 0}
+.tr-quote p{font-size:clamp(13px,1.2vw,15px);font-style:italic;line-height:1.55;opacity:.9}
+.tr-role{font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.tr-h{font-family:'Playfair Display',serif;font-size:clamp(32px,3.5vw,54px);font-weight:900;line-height:1.1;margin-bottom:22px}
+.tr-h em{font-style:italic;color:var(--gold)}
+.tr-text p{font-size:clamp(13px,1.3vw,15px);line-height:1.85;color:rgba(255,255,255,.62);margin-bottom:14px}
+.tr-text p strong{color:var(--white)}
+.tr-badges{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px}
+.tr-badge{background:rgba(26,79,196,.14);border:1px solid rgba(26,79,196,.28);color:rgba(255,255,255,.78);padding:7px 14px;border-radius:100px;font-size:11px;font-weight:500;transition:background .3s}
+.tr-badge:hover{background:rgba(26,79,196,.28)}
+
+/* ─── TESTIMONIALS ─── */
+.tm-bg{background:var(--navy)}
+.tm-slider{overflow:hidden;margin-top:clamp(30px,4vw,56px)}
+.tm-track{display:flex;gap:clamp(14px,1.5vw,22px);transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.tm-card{min-width:calc(50% - 11px);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:clamp(24px,3vw,40px);position:relative;flex-shrink:0}
+.tm-card::before{content:'"';position:absolute;top:14px;right:24px;font-family:'Playfair Display';font-size:90px;color:rgba(201,147,58,.09);line-height:1}
+.stars{color:var(--gold);font-size:13px;margin-bottom:14px;letter-spacing:2px}
+.tm-txt{font-size:clamp(13px,1.3vw,15px);line-height:1.85;color:rgba(255,255,255,.68);margin-bottom:26px;font-style:italic}
+.tm-auth{display:flex;align-items:center;gap:14px}
+.tm-av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--royal),var(--cobalt));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;flex-shrink:0}
+.tm-name{font-weight:600;font-size:14px}
+.tm-title{font-size:11px;color:var(--gold)}
+.tm-ctrl{display:flex;align-items:center;gap:14px;margin-top:28px}
+.tm-btn{width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);background:transparent;color:var(--white);font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s}
+.tm-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.dots{display:flex;gap:7px}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:background .3s,width .3s}
+.dot.on{background:var(--gold);width:22px;border-radius:4px}
+
+/* ─── CLIENTS ─── */
+.cl-bg{background:var(--deep)}
+.cl-logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(24px,4vw,48px);margin-top:clamp(30px,4vw,50px)}
+.cl-logo{height:44px;filter:brightness(0) invert(1) opacity(.3);transition:filter .3s}
+.cl-logo:hover{filter:brightness(0) invert(1) opacity(.75)}
+
+/* ─── GALLERY ─── */
+.gl-bg{background:var(--navy)}
+.gl-head{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:clamp(28px,3vw,48px)}
+.gl-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto;gap:clamp(10px,1.2vw,16px)}
+.gl-item{border-radius:8px;overflow:hidden;position:relative;transition:transform .38s,box-shadow .38s}
+.gl-item:hover{transform:scale(1.02);box-shadow:0 18px 44px rgba(0,0,0,.38)}
+.gl-item:nth-child(1){grid-column:span 2;grid-row:span 2}
+.gl-item img{width:100%;height:100%;object-fit:cover;min-height:clamp(140px,18vw,240px);display:block}
+.gl-ov{position:absolute;inset:0;background:rgba(7,18,31,.5);opacity:0;transition:opacity .3s;display:flex;align-items:center;justify-content:center;font-size:26px}
+.gl-item:hover .gl-ov{opacity:1}
+
+/* ─── CTA BANNER ─── */
+.cta-bg{background:linear-gradient(140deg,var(--royal) 0%,var(--cobalt) 55%,var(--deep) 100%);position:relative;overflow:hidden}
+.cta-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 110% at 80% 50%,rgba(201,147,58,.14),transparent)}
+.cta-in{text-align:center;position:relative;z-index:1}
+.cta-in h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4.5vw,62px);font-weight:900;margin-bottom:14px}
+.cta-in p{font-size:clamp(14px,1.4vw,17px);color:rgba(255,255,255,.68);max-width:540px;margin:0 auto 36px;line-height:1.75}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+
+/* ─── CONTACT ─── */
+.ct-bg{background:var(--deep)}
+.ct-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(30px,6vw,80px);margin-top:clamp(28px,3vw,50px)}
+.ct-info h3{font-family:'Playfair Display',serif;font-size:clamp(22px,2.2vw,30px);font-weight:700;margin-bottom:16px}
+.ct-info p{font-size:clamp(13px,1.2vw,15px);color:rgba(255,255,255,.55);line-height:1.75;margin-bottom:28px}
+.ct-detail{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.ct-ico{width:44px;height:44px;border-radius:8px;background:rgba(201,147,58,.13);border:1px solid rgba(201,147,58,.28);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.ct-lbl{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.12em;margin-bottom:2px}
+.ct-val{font-size:clamp(13px,1.2vw,15px);color:rgba(255,255,255,.8)}
+.ct-form{display:flex;flex-direction:column;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg{display:flex;flex-direction:column;gap:7px}
+.fg label{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+.fg input,.fg textarea,.fg select{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:13px 16px;color:var(--white);font-family:'DM Sans';font-size:14px;outline:none;transition:border-color .3s,background .3s;-webkit-appearance:none}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:rgba(201,147,58,.5);background:rgba(201,147,58,.04)}
+.fg textarea{resize:vertical;min-height:110px}
+.fg select option{background:var(--deep);color:var(--white)}
+.ct-submit{background:var(--gold);color:var(--navy);padding:15px 38px;border:none;border-radius:6px;font-family:'DM Sans';font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;transition:transform .22s,box-shadow .22s;align-self:flex-start}
+.ct-submit:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(201,147,58,.38)}
+.ct-socials{display:flex;gap:10px;margin-top:28px}
+.cs{width:40px;height:40px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--white);transition:background .3s}
+.cs:hover{background:var(--gold);color:var(--navy)}
+
+/* ─── FOOTER ─── */
+footer{background:#050d18;padding:clamp(50px,7vw,80px) clamp(20px,5vw,64px) clamp(24px,3vw,36px)}
+.ft-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:clamp(28px,4vw,56px);max-width:1400px;margin:0 auto clamp(36px,4vw,56px)}
+.ft-logo{font-family:'Playfair Display',serif;font-size:clamp(18px,1.8vw,22px);font-weight:900;margin-bottom:12px}
+.ft-logo span{display:block;font-size:9px;font-family:'DM Sans';color:var(--gold);letter-spacing:.3em;text-transform:uppercase;margin-top:3px}
+.ft-about{font-size:clamp(12px,1.1vw,14px);color:rgba(255,255,255,.38);line-height:1.85;margin-bottom:22px}
+.ft-s{display:flex;gap:10px}
+.fts-a{width:36px;height:36px;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--white);transition:background .3s}
+.fts-a:hover{background:var(--gold);color:var(--navy)}
+.ft-col h4{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.ft-col ul li a{font-size:clamp(12px,1.1vw,14px);color:rgba(255,255,255,.38);transition:color .3s,padding-left .3s;display:block}
+.ft-col ul li a:hover{color:var(--white);padding-left:5px}
+.ft-bot{max-width:1400px;margin:0 auto;padding-top:22px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ft-bot p{font-size:12px;color:rgba(255,255,255,.28)}
+
+/* ─── MOBILE BREAKPOINTS ─── */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;text-align:center;padding:clamp(80px,12vw,120px) clamp(20px,5vw,40px) 60px}
+  .hero-h1,.hero-sub,.hero-badge{text-align:center}
+  .hero-sub{margin:0 auto 36px}
+  .hero-btns{justify-content:center}
+  .hero-stats{justify-content:center}
+  .hero-visual{display:none}
+  .app-grid,.abt-grid,.tr-grid{grid-template-columns:1fr}
+  .app-img,.abt-img,.tr-img{order:-1}
+  .tr-socials{display:none}
+  .tr-quote{left:0;right:0;bottom:0;border-radius:0 0 var(--radius) var(--radius)}
+  .srv-grid{grid-template-columns:1fr 1fr}
+  .ft-grid{grid-template-columns:1fr 1fr}
+  .ct-grid{grid-template-columns:1fr}
+  .ham{display:flex}
+  .nav-links{display:none}
+}
+@media(max-width:640px){
+  .srv-grid{grid-template-columns:1fr}
+  .ft-grid{grid-template-columns:1fr}
+  .gl-grid{grid-template-columns:1fr 1fr}
+  .gl-item:nth-child(1){grid-column:span 1;grid-row:span 1}
+  .ft-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .tm-card{min-width:calc(100% - 0px)}
+  .abt-frame{display:none}
+  .abt-badge{right:0;top:16px}
+  .hero-stats{gap:20px}
+  .ft-bot{justify-content:center;text-align:center}
+  .cta-btns{flex-direction:column;align-items:center}
+  .hero-btns{flex-direction:column;align-items:center}
+}
+@media(max-width:380px){
+  .gl-grid{grid-template-columns:1fr}
+  .gl-item:nth-child(1){grid-column:span 1}
+  .hi h4{font-size:24px}
+  .ft-grid{gap:24px}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-logo">Thrive Skills Studio</div>
+  <div class="ld-bar"><div class="ld-prog"></div></div>
+  <div class="ld-sub">Loading Excellence</div>
+</div>
+
+<!-- CURSOR (desktop) -->
+<div id="cur"></div>
+<div id="cur-f"></div>
+
+<!-- SCROLL TO TOP -->
+<button id="stb" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">↑</button>
+
+<!-- ═══ NAV ═══ -->
+<nav id="nav">
+  <a href="#" class="nav-brand" aria-label="Home">
+    <strong>Thrive Skills Studio</strong>
+    <span>Shaping Global Professionals</span>
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#trainer">Trainer</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Book Session</a></li>
+  </ul>
+  <button class="ham" id="ham" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mob-drawer" id="drawer" role="dialog" aria-label="Navigation">
+  <a href="#about" onclick="closeDrawer()">About</a>
+  <a href="#services" onclick="closeDrawer()">Services</a>
+  <a href="#trainer" onclick="closeDrawer()">Trainer</a>
+  <a href="#gallery" onclick="closeDrawer()">Gallery</a>
+  <a href="#contact" onclick="closeDrawer()">Contact</a>
+  <a href="#contact" onclick="closeDrawer()" class="mob-cta">Book Session →</a>
+  <span class="mob-tel">📞 8191900051</span>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-bg"></div>
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="hero-inner">
+    <!-- Left -->
+    <div>
+      <div class="hero-badge">✦ 20+ Years of Global Training Excellence</div>
+      <h1 class="hero-h1">Guiding Your<br><em>Growth</em><br>Journey</h1>
+      <p class="hero-sub">Shaping Confidence, Communication &amp; Growth — empowering individuals, students, and professionals to unlock their true potential and achieve meaningful success.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-p">Book a Session →</a>
+        <a href="#services" class="btn-o">Our Services</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hs-num" data-target="5000" data-suffix="+">5000+</div>
+          <div class="hs-lbl">Professionals Trained</div>
+        </div>
+        <div>
+          <div class="hs-num" data-target="50" data-suffix="+">50+</div>
+          <div class="hs-lbl">Cities Covered</div>
+        </div>
+        <div>
+          <div class="hs-num" data-target="20" data-suffix="+">20+</div>
+          <div class="hs-lbl">Years Experience</div>
+        </div>
+      </div>
+    </div>
+    <!-- Right (desktop) -->
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hv-img">
+        <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/04/Preeti-Singh-Thrive-Skills-Studio-742x1024.png"
+             alt="Ms. Preeti Singh – Global Trainer"
+             onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80'">
+        <div class="hv-overlay"></div>
+      </div>
+      <div class="hv-card">
+        <div class="n">20+</div>
+        <div class="t">Years Global<br>Experience</div>
+      </div>
+      <div class="hv-tag">
+        <div class="a">Certified Trainer</div>
+        <div class="b">India · International</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MARQUEE ═══ -->
+<div class="mq-outer" aria-hidden="true">
+  <div class="mq-track">
+    <span class="mq-item">Corporate Training</span>
+    <span class="mq-item">Soft Skills Development</span>
+    <span class="mq-item">Leadership Coaching</span>
+    <span class="mq-item">Communication Excellence</span>
+    <span class="mq-item">University Programs</span>
+    <span class="mq-item">School Educator Training</span>
+    <span class="mq-item">Life Coaching</span>
+    <span class="mq-item">Personality Development</span>
+    <span class="mq-item">Corporate Training</span>
+    <span class="mq-item">Soft Skills Development</span>
+    <span class="mq-item">Leadership Coaching</span>
+    <span class="mq-item">Communication Excellence</span>
+    <span class="mq-item">University Programs</span>
+    <span class="mq-item">School Educator Training</span>
+    <span class="mq-item">Life Coaching</span>
+    <span class="mq-item">Personality Development</span>
+  </div>
+</div>
+
+<!-- ═══ APPROACH ═══ -->
+<div class="app-bg sec-out" id="about">
+  <div class="sec">
+    <div class="app-grid">
+      <div>
+        <div class="sec-lbl rv">Our Approach</div>
+        <h2 class="sec-h rv">How We Create<br><em>Real Impact</em></h2>
+        <p class="sec-p rv" style="margin-bottom:36px">We focus on practical, experiential learning that creates measurable transformation in individuals and organisations across India and beyond.</p>
+        <div class="app-cards">
+          <div class="app-card rv">
+            <div class="app-icon">🎯</div>
+            <div>
+              <h3>Building Future Ready Skills</h3>
+              <p>Practical, real-world skills that help individuals perform, adapt, and succeed in dynamic environments.</p>
+            </div>
+          </div>
+          <div class="app-card rv">
+            <div class="app-icon">🗣️</div>
+            <div>
+              <h3>Boosting Confidence &amp; Communication</h3>
+              <p>We enable individuals to speak, present, and lead with clarity, confidence, and lasting impact.</p>
+            </div>
+          </div>
+          <div class="app-card rv">
+            <div class="app-icon">🚀</div>
+            <div>
+              <h3>Creating High Performance Teams</h3>
+              <p>Collaborative, growth-driven teams that deliver consistent results and long-term organisational success.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="app-img rv-r">
+        <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/04/preeti-singh-in-office-845x1024.png"
+             alt="Ms. Preeti Singh training session"
+             onerror="this.src='https://images.unsplash.com/photo-1560439514-4e9645039924?w=700&q=80'">
+        <div class="app-img-ov"></div>
+        <div class="app-badge">
+          <span>Certified Global Trainer</span>
+          <p>Transforming capability into confidence across India &amp; beyond.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ABOUT / WHO WE ARE ═══ -->
+<div class="sec-out" style="background:var(--navy)">
+  <div class="sec">
+    <div class="abt-grid">
+      <div class="abt-img rv-l">
+        <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2025/12/0-1024x974.png"
+             alt="Thrive Skills Studio"
+             onerror="this.src='https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80'">
+        <div class="abt-frame"></div>
+        <div class="abt-badge">
+          <div class="n">100%</div>
+          <div class="l">Customised<br>Programs</div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-lbl rv">Who We Are</div>
+        <h2 class="sec-h rv">Our <em>Aspiration</em><br>&amp; Purpose</h2>
+        <div class="abt-text">
+          <p class="rv">At <strong>ThriveSkills</strong>, we are a growth-driven training and development organisation committed to <strong>sharpening human potential and shaping future-ready professionals</strong>.</p>
+          <p class="rv">We design and deliver <strong>high-impact soft skills and personality development programs</strong> that strengthen communication, leadership mindset, emotional intelligence, and workplace excellence.</p>
+          <p class="rv">Our mission is to <strong>transform capability into confidence, skills into success, and ambition into sustainable achievement</strong> through experiential learning and psychologically grounded methods.</p>
+        </div>
+        <div class="abt-hi">
+          <div class="hi rv"><h4>5,000+</h4><p>Professionals Trained</p></div>
+          <div class="hi rv"><h4>50+</h4><p>Cities Covered</p></div>
+          <div class="hi rv"><h4>3</h4><p>Core Programs</p></div>
+          <div class="hi rv"><h4>Global</h4><p>Perspective</p></div>
+        </div>
+        <a href="#contact" class="btn-p rv" style="margin-top:8px">Know More →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SERVICES ═══ -->
+<div class="srv-bg sec-out" id="services">
+  <div class="sec">
+    <div class="srv-head">
+      <div>
+        <div class="sec-lbl rv">What We Offer</div>
+        <h2 class="sec-h rv">Our Core <em>Services</em></h2>
+      </div>
+      <p class="sec-p rv" style="text-align:right;max-width:380px">Tailored training programs designed for every stage of professional growth.</p>
+    </div>
+    <div class="srv-grid">
+      <!-- Card 1 -->
+      <div class="srv-card rv">
+        <div class="srv-img">
+          <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/03/corporate-2.png"
+               alt="Corporate Training"
+               onerror="this.src='https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80'">
+          <div class="srv-img-ov"></div>
+          <div class="srv-num">01</div>
+        </div>
+        <div class="srv-body">
+          <div class="srv-tag">Corporate</div>
+          <h3>Corporate Training &amp; Capability Development</h3>
+          <p>Building emotionally resilient, mentally fit, and high-performing teams with new-age leadership and influence skills.</p>
+          <a href="#contact" class="srv-link">Explore Program →</a>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="srv-card rv">
+        <div class="srv-img">
+          <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/04/university-6.png"
+               alt="University Training"
+               onerror="this.src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80'">
+          <div class="srv-img-ov"></div>
+          <div class="srv-num">02</div>
+        </div>
+        <div class="srv-body">
+          <div class="srv-tag">Higher Education</div>
+          <h3>University &amp; College Training Programs</h3>
+          <p>Bridging the gap between academic learning and real-world corporate expectations, building professional confidence.</p>
+          <a href="#contact" class="srv-link">Explore Program →</a>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="srv-card rv">
+        <div class="srv-img">
+          <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2025/12/bz-2.png"
+               alt="School Training"
+               onerror="this.src='https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=80'">
+          <div class="srv-img-ov"></div>
+          <div class="srv-num">03</div>
+        </div>
+        <div class="srv-body">
+          <div class="srv-tag">Education</div>
+          <h3>School &amp; Educator Training Programs</h3>
+          <p>Practical strategies aligned with NEP 2020 vision, building structured, engaging, and psychologically safe classrooms.</p>
+          <a href="#contact" class="srv-link">Explore Program →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FEATURES ═══ -->
+<div class="ft-bg sec-out">
+  <div class="sec">
+    <div class="sec-lbl rv">Corporate Training</div>
+    <h2 class="sec-h rv">15 Key <em>Capabilities</em> We Build</h2>
+    <div class="ft-grid">
+      <div class="ft-item rv"><div class="ft-n">01</div><h4>Emotional Intelligence &amp; Workplace Well-Being</h4><p>Building emotionally resilient, mentally fit, high-performing teams.</p></div>
+      <div class="ft-item rv"><div class="ft-n">02</div><h4>Leadership Mindset &amp; People Management</h4><p>New-age leadership, influence skills, accountability culture.</p></div>
+      <div class="ft-item rv"><div class="ft-n">03</div><h4>Communication Excellence &amp; Executive Presence</h4><p>Business etiquette, assertiveness, and impact speaking.</p></div>
+      <div class="ft-item rv"><div class="ft-n">04</div><h4>High-Performance Culture &amp; Productivity</h4><p>Focus, discipline, accountability, and results-driven work habits.</p></div>
+      <div class="ft-item rv"><div class="ft-n">05</div><h4>Team Effectiveness &amp; Collaboration</h4><p>Trust building, cross-functional collaboration, psychological safety.</p></div>
+      <div class="ft-item rv"><div class="ft-n">06</div><h4>Conflict Management &amp; Difficult Conversations</h4><p>Workplace harmony, negotiation skills, resolution frameworks.</p></div>
+      <div class="ft-item rv"><div class="ft-n">07</div><h4>Change Agility &amp; Growth Mindset</h4><p>Adaptability, learning agility, and future-readiness.</p></div>
+      <div class="ft-item rv"><div class="ft-n">08</div><h4>Stress Management &amp; Burnout Prevention</h4><p>Energy management, emotional regulation, mental fitness.</p></div>
+      <div class="ft-item rv"><div class="ft-n">09</div><h4>Decision-Making &amp; Critical Thinking</h4><p>Structured thinking, business judgment, bias-free decisions.</p></div>
+      <div class="ft-item rv"><div class="ft-n">10</div><h4>Employee Engagement &amp; Motivation Science</h4><p>Ownership culture, intrinsic motivation, performance psychology.</p></div>
+      <div class="ft-item rv"><div class="ft-n">11</div><h4>DEI &amp; Cultural Intelligence</h4><p>Inclusive leadership, cross-cultural sensitivity, global harmony.</p></div>
+      <div class="ft-item rv"><div class="ft-n">12</div><h4>Upskilling, Reskilling &amp; Career Acceleration</h4><p>Future skills, professional identity, continuous development.</p></div>
+      <div class="ft-item rv"><div class="ft-n">13</div><h4>Gen Z Workforce Management</h4><p>Multi-generational teams, motivation, workplace alignment.</p></div>
+      <div class="ft-item rv"><div class="ft-n">14</div><h4>Business Ethics &amp; Professional Conduct</h4><p>Integrity, corporate values, accountability, compliance culture.</p></div>
+      <div class="ft-item rv"><div class="ft-n">15</div><h4>Customer Experience &amp; Service Excellence</h4><p>Client centricity, relationship management, service mindset.</p></div>
+    </div>
+    <div class="ft-cta rv">
+      <a href="#contact" class="btn-p">Design Your Training Program →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TRAINER ═══ -->
+<div class="sec-out" style="background:var(--navy)" id="trainer">
+  <div class="sec">
+    <div class="tr-grid">
+      <div class="tr-img rv-l">
+        <img src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/04/preeti-singh-in-office-845x1024.png"
+             alt="Ms. Preeti Singh"
+             onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80'">
+        <div class="tr-socials" aria-label="Social links">
+          <a href="http://linkedin.com/in/preeti-singh-b71653133" target="_blank" rel="noopener" class="tr-soc" title="LinkedIn">LI</a>
+          <a href="https://www.instagram.com/thriveskillsstudio" target="_blank" rel="noopener" class="tr-soc" title="Instagram">IG</a>
+          <a href="https://www.facebook.com/profile.php?id=61586336128257" target="_blank" rel="noopener" class="tr-soc" title="Facebook">FB</a>
+          <a href="https://www.youtube.com/@ThriveSkillsStudio" target="_blank" rel="noopener" class="tr-soc" title="YouTube">YT</a>
+        </div>
+        <div class="tr-quote">
+          <p>"Empowering people is not my profession — it is my purpose."</p>
+        </div>
+      </div>
+      <div class="tr-text">
+        <div class="sec-lbl rv">Our Leadership</div>
+        <div class="tr-role rv">Global Trainer · Certified Life Coach · Career &amp; Leadership Mentor</div>
+        <h2 class="tr-h rv">Ms. <em>Preeti</em><br>Singh</h2>
+        <p class="rv">With over <strong>20 years of global training experience</strong>, Ms. Preeti Singh is a dynamic learning leader specialising in <strong>soft skills, leadership development, and personality transformation</strong> across corporate and educational ecosystems.</p>
+        <p class="rv">She delivers <strong>customised training solutions</strong> for corporates and institutions, building online and offline learning platforms, and providing strategic guidance to trainers and participants to address core professional challenges.</p>
+        <p class="rv">Her expertise spans <strong>instructional design, curriculum architecture, assessment frameworks, and impact evaluation</strong>, ensuring every program delivers measurable growth.</p>
+        <p class="rv">An <strong>avid traveller and cultural explorer</strong>, she integrates global perspectives into her training methodology and actively hosts national and international programs.</p>
+        <div class="tr-badges rv">
+          <span class="tr-badge">Soft Skills Expert</span>
+          <span class="tr-badge">Leadership Development</span>
+          <span class="tr-badge">Personality Transformation</span>
+          <span class="tr-badge">Certified Life Coach</span>
+          <span class="tr-badge">NEP 2020 Expert</span>
+          <span class="tr-badge">Cross-Cultural Trainer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<div class="tm-bg sec-out">
+  <div class="sec">
+    <div class="sec-lbl rv">Testimonials</div>
+    <h2 class="sec-h rv">Trusted by <em>Professionals</em><br>Worldwide</h2>
+    <div class="tm-slider">
+      <div class="tm-track" id="tmTrack">
+        <div class="tm-card">
+          <div class="stars">★★★★★</div>
+          <p class="tm-txt">I am a homemaker, and when I decided to start a small-scale business, a friend suggested I attend Ms. Preeti's soft skills session. It turned out to be a turning point — her session helped me take the first step towards my entrepreneurial journey.</p>
+          <div class="tm-auth"><div class="tm-av">A</div><div><div class="tm-name">Ms. Alexsandra</div><div class="tm-title">Entrepreneur</div></div></div>
+        </div>
+        <div class="tm-card">
+          <div class="stars">★★★★★</div>
+          <p class="tm-txt">Ms. Preeti Singh is a great mentor. She has vast knowledge and a strong understanding of NEP 2020. I have attended her workshop, and the connection she builds with participants is incredible. Truly inspiring.</p>
+          <div class="tm-auth"><div class="tm-av">G</div><div><div class="tm-name">Ms. Gurpreet Kaur</div><div class="tm-title">Workshop Participant</div></div></div>
+        </div>
+        <div class="tm-card">
+          <div class="stars">★★★★★</div>
+          <p class="tm-txt">Working with Ms. Preeti was a wonderful experience. Her training beautifully blended the cultural perspectives of India and Germany. Her approach brought depth, engagement, and true cross-cultural understanding to every session.</p>
+          <div class="tm-auth"><div class="tm-av">N</div><div><div class="tm-name">Ms. Natalia Muller</div><div class="tm-title">Senior Coordinator, Germany</div></div></div>
+        </div>
+        <div class="tm-card">
+          <div class="stars">★★★★★</div>
+          <p class="tm-txt">Ms. Preeti conducted a Business Ethics session for our Bajaj Allianz team — truly insightful. The way she connected real-world scenarios with practical skills made complex ideas feel simple yet powerful. A lasting impression.</p>
+          <div class="tm-auth"><div class="tm-av">A</div><div><div class="tm-name">Ms. Ashima Puri</div><div class="tm-title">Manager, Bajaj Allianz</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="tm-ctrl">
+      <button class="tm-btn" onclick="slideTm(-1)" aria-label="Previous">←</button>
+      <button class="tm-btn" onclick="slideTm(1)" aria-label="Next">→</button>
+      <div class="dots" id="tmDots">
+        <div class="dot on" onclick="goTm(0)"></div>
+        <div class="dot" onclick="goTm(1)"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CLIENTS ═══ -->
+<div class="cl-bg sec-out">
+  <div class="sec">
+    <div class="sec-lbl rv" style="justify-content:center">Trusted By</div>
+    <h2 class="sec-h rv" style="text-align:center">Companies We've<br><em>Worked With</em></h2>
+    <div class="cl-logos">
+      <img class="cl-logo" src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/03/Bajaj-Allianz-Insurance-Logo-e1773913125419.avif" alt="Bajaj Allianz" onerror="this.style.display='none'">
+      <img class="cl-logo" src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/03/Estreet-Final-Logo-0.png" alt="Estreet" onerror="this.style.display='none'">
+      <img class="cl-logo" src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/03/work.png" alt="Client" onerror="this.style.display='none'">
+      <img class="cl-logo" src="https://www.thriveskillsstudio.com/wp-content/uploads/2026/03/home_logo.webp" alt="Client" onerror="this.style.display='none'">
+    </div>
+  </div>
+</div>
+
+<!-- ═══ GALLERY ═══ -->
+<div class="gl-bg sec-out" id="gallery">
+  <div class="sec">
+    <div class="gl-head">
+      <div>
+        <div class="sec-lbl rv">Gallery</div>
+        <h2 class="sec-h rv">Our <em>Journey</em><br>In Action</h2>
+      </div>
+      <a href="#contact" class="btn-o rv">View All →</a>
+    </div>
+    <div class="gl-grid">
+      <div class="gl-item rv"><img src="https://www.thriveskillsstudio.com/wp-content/uploads/2025/12/Rectangle-21.png" alt="Gallery 1" onerror="this.src='https://images.unsplash.com/photo-1560439514-4e9645039924?w=700&q=80'"><div class="gl-ov">+</div></div>
+      <div class="gl-item rv"><img src="https://www.thriveskillsstudio.com/wp-content/uploads/2025/12/Rectangle-20.png" alt="Gallery 2" onerror="this.src='https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80'"><div class="gl-ov">+</div></div>
+      <div class="gl-item rv"><img src="https://www.thriveskillsstudio.com/wp-content/uploads/2025/12/Rectangle-22-798x1024.png" alt="Gallery 3" onerror="this.src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80'"><div class="gl-ov">+</div></div>
+      <div class="gl-item rv"><img src="https://www.thriveskillsstudio.com/wp-content/uploads/2025/12/Rectangle-24.png" alt="Gallery 4" onerror="this.src='https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=80'"><div class="gl-ov">+</div></div>
+      <div class="gl-item rv"><img src="https://www.thriveskillsstudio.com/wp-content/uploads/2025/12/Rectangle-23.png" alt="Gallery 5" onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80'"><div class="gl-ov">+</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CTA BANNER ═══ -->
+<div class="cta-bg sec-out">
+  <div class="sec">
+    <div class="cta-in">
+      <div class="sec-lbl rv" style="justify-content:center">Ready to Transform?</div>
+      <h2 class="rv">Empowering Skills for<br><em style="color:var(--gold-lt)">Career Growth</em></h2>
+      <p class="rv">Thrive Skills Studio provides professional training and corporate skill development programs designed to help individuals and organisations grow.</p>
+      <div class="cta-btns rv">
+        <a href="#contact" class="btn-p">Book Consultation Now →</a>
+        <a href="tel:8191900051" class="btn-o">📞 8191900051</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CONTACT ═══ -->
+<div class="ct-bg sec-out" id="contact">
+  <div class="sec">
+    <div class="sec-lbl rv">Get In Touch</div>
+    <h2 class="sec-h rv">Let's Start Your <em>Growth</em><br>Journey Together</h2>
+    <div class="ct-grid">
+      <!-- Info -->
+      <div class="rv-l">
+        <h3>Contact Information</h3>
+        <p>We are committed to understanding your training needs and designing the right solution for you.</p>
+        <div class="ct-detail">
+          <div class="ct-ico">✉️</div>
+          <div><div class="ct-lbl">Email</div><a href="mailto:preeti@thriveskillsstudio.com" class="ct-val">preeti@thriveskillsstudio.com</a></div>
+        </div>
+        <div class="ct-detail">
+          <div class="ct-ico">📞</div>
+          <div><div class="ct-lbl">Phone</div><a href="tel:8191900051" class="ct-val">8191900051</a></div>
+        </div>
+        <div class="ct-detail">
+          <div class="ct-ico">📍</div>
+          <div><div class="ct-lbl">Location</div><span class="ct-val">Shimla, Himachal Pradesh, India</span></div>
+        </div>
+        <div class="ct-detail">
+          <div class="ct-ico">🌐</div>
+          <div><div class="ct-lbl">Website</div><a href="https://www.thriveskillsstudio.com" target="_blank" class="ct-val">thriveskillsstudio.com</a></div>
+        </div>
+        <div class="ct-socials">
+          <a href="https://www.instagram.com/thriveskillsstudio" target="_blank" rel="noopener" class="cs" title="Instagram">IG</a>
+          <a href="https://www.linkedin.com/in/preeti-singh-b71653133/" target="_blank" rel="noopener" class="cs" title="LinkedIn">LI</a>
+          <a href="https://www.facebook.com/profile.php?id=61586336128257" target="_blank" rel="noopener" class="cs" title="Facebook">FB</a>
+          <a href="https://www.youtube.com/@ThriveSkillsStudio" target="_blank" rel="noopener" class="cs" title="YouTube">YT</a>
+        </div>
+      </div>
+      <!-- Form -->
+      <div class="rv-r">
+        <div class="ct-form">
+          <div class="form-row">
+            <div class="fg"><label for="fname">Your Name</label><input id="fname" type="text" placeholder="Ms. Priya Sharma" autocomplete="name"></div>
+            <div class="fg"><label for="fphone">Phone Number</label><input id="fphone" type="tel" placeholder="+91 98765 43210" autocomplete="tel"></div>
+          </div>
+          <div class="fg"><label for="femail">Email Address</label><input id="femail" type="email" placeholder="you@company.com" autocomplete="email"></div>
+          <div class="fg">
+            <label for="fservice">Interested In</label>
+            <select id="fservice">
+              <option value="">Select a Program</option>
+              <option>Corporate Training &amp; Capability Development</option>
+              <option>University &amp; College Training Programs</option>
+              <option>School &amp; Educator Training Programs</option>
+              <option>Life Coaching / Personal Mentoring</option>
+            </select>
+          </div>
+          <div class="fg"><label for="fmsg">Message</label><textarea id="fmsg" placeholder="Tell us about your training requirements..."></textarea></div>
+          <button class="ct-submit" type="button" onclick="handleSubmit(this)">Send Message →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="ft-grid">
+    <div>
+      <div class="ft-logo">Thrive Skills Studio<span>Shaping Global Professionals</span></div>
+      <p class="ft-about">At Thrive Skills Studio, we empower individuals and organisations to achieve their professional dreams through transformative learning experiences led by globally certified trainers.</p>
+      <div class="ft-s">
+        <a href="https://www.instagram.com/thriveskillsstudio" target="_blank" rel="noopener" class="fts-a" title="Instagram">IG</a>
+        <a href="https://www.linkedin.com/in/preeti-singh-b71653133/" target="_blank" rel="noopener" class="fts-a" title="LinkedIn">LI</a>
+        <a href="https://www.facebook.com/profile.php?id=61586336128257" target="_blank" rel="noopener" class="fts-a" title="Facebook">FB</a>
+        <a href="https://www.youtube.com/@ThriveSkillsStudio" target="_blank" rel="noopener" class="fts-a" title="YouTube">YT</a>
+      </div>
+    </div>
+    <div class="ft-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#trainer">Our Trainer</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Corporate Training</a></li>
+        <li><a href="#services">University Programs</a></li>
+        <li><a href="#services">School Programs</a></li>
+        <li><a href="#contact">Book a Session</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:preeti@thriveskillsstudio.com">preeti@thriveskillsstudio.com</a></li>
+        <li><a href="tel:8191900051">8191900051</a></li>
+        <li><a href="#">Shimla, Himachal Pradesh</a></li>
+        <li><a href="https://www.thriveskillsstudio.com" target="_blank">thriveskillsstudio.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <p>© 2026 Thrive Skills Studio. All Rights Reserved.</p>
+    <p>Crafted with ♥ for Global Excellence</p>
+  </div>
+</footer>
+
+<!-- ═══ SCRIPTS ═══ -->
+<script>
+/* LOADER */
+window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('loader').classList.add('done'),1600)});
+
+/* CURSOR (desktop only) */
+if(matchMedia('(pointer:fine)').matches){
+  const cur=document.getElementById('cur'),cf=document.getElementById('cur-f');
+  let mx=0,my=0,fx=0,fy=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+  (function anim(){
+    cur.style.left=mx+'px';cur.style.top=my+'px';
+    fx+=(mx-fx)*0.11;fy+=(my-fy)*0.11;
+    cf.style.left=fx+'px';cf.style.top=fy+'px';
+    requestAnimationFrame(anim);
+  })();
+  document.querySelectorAll('a,button,.srv-card,.app-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';cf.style.width='56px';cf.style.height='56px';cf.style.borderColor='rgba(201,147,58,.8)'});
+    el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';cf.style.width='38px';cf.style.height='38px';cf.style.borderColor='rgba(201,147,58,.45)'});
+  });
+}
+
+/* NAV */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('stuck',scrollY>60);
+  document.getElementById('stb').classList.toggle('vis',scrollY>400);
+});
+
+/* HAMBURGER */
+const ham=document.getElementById('ham'),drawer=document.getElementById('drawer');
+function closeDrawer(){ham.classList.remove('open');drawer.classList.remove('open');ham.setAttribute('aria-expanded','false')}
+ham.addEventListener('click',()=>{
+  const open=drawer.classList.toggle('open');
+  ham.classList.toggle('open');
+  ham.setAttribute('aria-expanded',open);
+});
+
+/* SCROLL REVEAL */
+const rvObs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      const delay=parseInt(e.target.dataset.d||0);
+      setTimeout(()=>e.target.classList.add('on'),delay);
+    }
+  });
+},{threshold:.1});
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach((el,i)=>{el.dataset.d=(i%6)*70;rvObs.observe(el)});
+
+/* COUNTER ANIMATION */
+let counted=false;
+const cObs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting&&!counted){
+    counted=true;
+    document.querySelectorAll('.hs-num[data-target]').forEach(el=>{
+      const target=parseInt(el.dataset.target),suffix=el.dataset.suffix||'';
+      let c=0,step=target/60;
+      const t=setInterval(()=>{c=Math.min(c+step,target);el.textContent=Math.floor(c)+suffix;if(c>=target)clearInterval(t)},22);
+    });
+  }
+},{threshold:.5});
+const statsWrap=document.querySelector('.hero-stats');
+if(statsWrap)cObs.observe(statsWrap);
+
+/* TESTIMONIALS */
+let tmCur=0;
+const tmTrack=document.getElementById('tmTrack');
+const tmCards=tmTrack.querySelectorAll('.tm-card');
+const tmDots=document.getElementById('tmDots');
+let perSlide=window.innerWidth<=640?1:2;
+let totalTm=Math.ceil(tmCards.length/perSlide);
+
+function updTm(){
+  perSlide=window.innerWidth<=640?1:2;
+  totalTm=Math.ceil(tmCards.length/perSlide);
+  tmCur=Math.min(tmCur,totalTm-1);
+  const w=tmCards[0].offsetWidth+parseInt(getComputedStyle(tmTrack).gap||22);
+  tmTrack.style.transform=`translateX(-${tmCur*(w*perSlide)}px)`;
+  tmDots.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===tmCur));
+}
+function slideTm(d){tmCur=(tmCur+d+totalTm)%totalTm;updTm()}
+function goTm(i){tmCur=i;updTm()}
+window.addEventListener('resize',updTm);
+setInterval(()=>slideTm(1),6500);
+
+/* MAGNETIC BUTTONS (desktop) */
+if(matchMedia('(pointer:fine)').matches){
+  document.querySelectorAll('.btn-p,.btn-o,.nav-cta').forEach(btn=>{
+    btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.16}px,${(e.clientY-r.top-r.height/2)*.16}px)`});
+    btn.addEventListener('mouseleave',()=>btn.style.transform='');
+  });
+}
+
+/* ORBS PARALLAX (desktop) */
+if(matchMedia('(pointer:fine)').matches){
+  document.addEventListener('mousemove',e=>{
+    const x=(e.clientX/innerWidth-.5)*18,y=(e.clientY/innerHeight-.5)*18;
+    document.querySelectorAll('.orb').forEach((o,i)=>{const f=(i+1)*.45;o.style.transform=`translate(${x*f}px,${y*f}px)`});
+  });
+}
+
+/* CONTACT FORM */
+function handleSubmit(btn){
+  const n=document.getElementById('fname').value;
+  const e=document.getElementById('femail').value;
+  if(!n||!e){btn.textContent='Please fill required fields';return}
+  btn.textContent='Sending…';btn.disabled=true;
+  setTimeout(()=>{btn.textContent='✓ Message Sent!';btn.style.background='#2a7a4f';},1800);
+}
+</script>
+</body>
+</html>
